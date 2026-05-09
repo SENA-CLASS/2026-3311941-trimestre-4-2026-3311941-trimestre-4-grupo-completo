@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: project-yml
+
+# Database configuration
+  mongodb:
+    host: localhost
+    port: 27017
+    database: ejemplo01
+    #username: myuser
+    #password: mypassword
