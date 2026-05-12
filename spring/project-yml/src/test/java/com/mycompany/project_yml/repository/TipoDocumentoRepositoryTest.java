@@ -20,6 +20,7 @@ class TipoDocumentoRepositoryTest {
         tipoDocumentoRepository.insert(tipoDocumento);
 
 
+
     }
 
 }

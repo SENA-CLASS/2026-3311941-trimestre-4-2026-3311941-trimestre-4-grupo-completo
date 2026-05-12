@@ -9,3 +9,6 @@ spring:
     database: ejemplo01
     #username: myuser
     #password: mypassword
+  data:
+    mongodb:
+      auto-index-creation: true

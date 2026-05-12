@@ -1,10 +1,32 @@
 package com.mycompany.project_yml.domain;
 
+import jakarta.annotation.Nonnull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "tipo_documento") // esta anotaacoin indicando que clase va se un documento en mongo
 public class TipoDocumento {
+    @Id // indica que este campo es el identificador unico del documento en mongo
     private String id;
+
+    @Nonnull
+    @Indexed(unique = true, name = "idx_unique_sigla") // crea un indice unico en mongo para este campo
+    @Field("sigla")
     private String sigla;
+
+    @Nonnull
+    @Field("nombre_documento")
+    @Indexed(unique = true, name = "idx_unique_nombre_documento")
     private String nombreDocumento;
+
+    @Nonnull
+    @Field("estado")
     private String estado;
+
+    public TipoDocumento() {
+    }
 
     public TipoDocumento(String id, String sigla, String nombreDocumento, String estado) {
         this.id = id;
