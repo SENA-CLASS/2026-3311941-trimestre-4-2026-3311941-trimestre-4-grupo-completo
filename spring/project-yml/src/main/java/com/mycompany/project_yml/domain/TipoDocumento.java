@@ -6,8 +6,15 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Document(collection = "tipo_documento") // esta anotaacoin indicando que clase va se un documento en mongo
-public class TipoDocumento {
+public class TipoDocumento implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id // indica que este campo es el identificador unico del documento en mongo
     private String id;
 
