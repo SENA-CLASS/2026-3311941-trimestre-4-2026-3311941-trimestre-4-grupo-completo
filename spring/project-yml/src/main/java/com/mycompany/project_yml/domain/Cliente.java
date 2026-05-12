@@ -3,6 +3,7 @@ package com.mycompany.project_yml.domain;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -28,7 +29,6 @@ public class Cliente implements Serializable {
     @Field("primer_nombre")
     private String primerNombre;
 
-    @Nonnull
     @Size(max = 50)
     @Field("segundo_nombre")
     private String segundoNombre;
@@ -38,13 +38,15 @@ public class Cliente implements Serializable {
     @Field("primer_apellido")
     private String primerApellido;
 
-    @Nonnull
     @Size(max = 50)
     @Field("segundo_apellido")
     private String segundoApelligo;
 
+    @DBRef
+    @Field("tipo_documento")
+    private TipoDocumento tipoDocumento;
 
-    public Cliente(String id, @Nonnull String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApelligo) {
+    public Cliente(String id, @Nonnull String numeroDocumento, @Nonnull String primerNombre, String segundoNombre, @Nonnull String primerApellido, String segundoApelligo) {
         this.id = id;
         this.numeroDocumento = numeroDocumento;
         this.primerNombre = primerNombre;
@@ -100,5 +102,13 @@ public class Cliente implements Serializable {
 
     public void setSegundoApelligo(String segundoApelligo) {
         this.segundoApelligo = segundoApelligo;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 }
