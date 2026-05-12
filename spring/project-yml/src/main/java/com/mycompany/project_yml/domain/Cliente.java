@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.io.Serial;
 import java.io.Serializable;
 
-@Document(collection = "clientes")
+@Document(collection = "cliente")
 public class Cliente implements Serializable {
 
     @Serial
@@ -19,12 +19,86 @@ public class Cliente implements Serializable {
     private String id;
 
     @Nonnull
+    @Size(max = 50)
     @Field("numero_documento")
     private String numeroDocumento;
+
+    @Nonnull
+    @Size(max = 50)
+    @Field("primer_nombre")
     private String primerNombre;
+
+    @Nonnull
+    @Size(max = 50)
+    @Field("segundo_nombre")
     private String segundoNombre;
+
+    @Nonnull
+    @Size(max = 50)
+    @Field("primer_apellido")
     private String primerApellido;
+
+    @Nonnull
+    @Size(max = 50)
+    @Field("segundo_apellido")
     private String segundoApelligo;
 
 
+    public Cliente(String id, @Nonnull String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApelligo) {
+        this.id = id;
+        this.numeroDocumento = numeroDocumento;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApelligo = segundoApelligo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Nonnull
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(@Nonnull String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public String getSegundoApelligo() {
+        return segundoApelligo;
+    }
+
+    public void setSegundoApelligo(String segundoApelligo) {
+        this.segundoApelligo = segundoApelligo;
+    }
 }

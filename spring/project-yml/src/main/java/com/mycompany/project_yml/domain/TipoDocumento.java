@@ -32,9 +32,6 @@ public class TipoDocumento implements Serializable {
     @Field("estado")
     private String estado;
 
-    public TipoDocumento() {
-    }
-
     public TipoDocumento(String id, String sigla, String nombreDocumento, String estado) {
         this.id = id;
         this.sigla = sigla;
