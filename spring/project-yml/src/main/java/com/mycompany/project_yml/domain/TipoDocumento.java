@@ -1,6 +1,8 @@
 package com.mycompany.project_yml.domain;
 
+import com.mycompany.project_yml.domain.enumeration.Estado;
 import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,18 +23,20 @@ public class TipoDocumento implements Serializable {
     @Nonnull
     @Indexed(unique = true, name = "idx_unique_sigla") // crea un indice unico en mongo para este campo
     @Field("sigla")
+    @Size(max = 10)
     private String sigla;
 
     @Nonnull
     @Field("nombre_documento")
+    @Size(max = 100)
     @Indexed(unique = true, name = "idx_unique_nombre_documento")
     private String nombreDocumento;
 
     @Nonnull
     @Field("estado")
-    private String estado;
+    private Estado estado;
 
-    public TipoDocumento(String id, String sigla, String nombreDocumento, String estado) {
+    public TipoDocumento(String id, @Nonnull String sigla, @Nonnull String nombreDocumento, @Nonnull Estado estado) {
         this.id = id;
         this.sigla = sigla;
         this.nombreDocumento = nombreDocumento;
@@ -47,27 +51,30 @@ public class TipoDocumento implements Serializable {
         this.id = id;
     }
 
+    @Nonnull
     public String getSigla() {
         return sigla;
     }
 
-    public void setSigla(String sigla) {
+    public void setSigla(@Nonnull String sigla) {
         this.sigla = sigla;
     }
 
+    @Nonnull
     public String getNombreDocumento() {
         return nombreDocumento;
     }
 
-    public void setNombreDocumento(String nombreDocumento) {
+    public void setNombreDocumento(@Nonnull String nombreDocumento) {
         this.nombreDocumento = nombreDocumento;
     }
 
-    public String getEstado() {
+    @Nonnull
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(@Nonnull Estado estado) {
         this.estado = estado;
     }
 }
