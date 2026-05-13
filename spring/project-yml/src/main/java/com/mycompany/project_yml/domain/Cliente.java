@@ -1,5 +1,6 @@
 package com.mycompany.project_yml.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
@@ -45,6 +46,7 @@ public class Cliente implements Serializable {
 
     @DBRef
     @Field("tipo_documento")
+    @JsonIgnoreProperties(value = { "clientes" }, allowSetters = true)
     private TipoDocumento tipoDocumento;
 
     public Cliente(String id, @Nonnull String numeroDocumento, @Nonnull String primerNombre, String segundoNombre, @Nonnull String primerApellido, String segundoApelligo) {

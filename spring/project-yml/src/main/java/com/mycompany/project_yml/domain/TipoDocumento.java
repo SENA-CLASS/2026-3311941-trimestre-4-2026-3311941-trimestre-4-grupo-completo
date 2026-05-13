@@ -5,11 +5,14 @@ import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Document(collection = "tipo_documento") // esta anotaacoin indicando que clase va se un documento en mongo
 public class TipoDocumento implements Serializable {
@@ -35,6 +38,10 @@ public class TipoDocumento implements Serializable {
     @Nonnull
     @Field("estado")
     private Estado estado;
+
+    @DBRef // indica que este campo es una referencia a otro documento en mongo
+    @Field("clientes")
+    private Set<Cliente> clientes = new HashSet<>();
 
     public TipoDocumento(String id, @Nonnull String sigla, @Nonnull String nombreDocumento, @Nonnull Estado estado) {
         this.id = id;
