@@ -49,6 +49,10 @@ public class Cliente implements Serializable {
     @JsonIgnoreProperties(value = { "clientes" }, allowSetters = true)
     private TipoDocumento tipoDocumento;
 
+    @DocumentReference
+    @Field("cuenta")
+    private Cuenta cuenta;
+
     public Cliente(String id, @Nonnull String numeroDocumento, @Nonnull String primerNombre, String segundoNombre, @Nonnull String primerApellido, String segundoApelligo) {
         this.id = id;
         this.numeroDocumento = numeroDocumento;
@@ -113,5 +117,13 @@ public class Cliente implements Serializable {
 
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 }
