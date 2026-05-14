@@ -3,6 +3,7 @@ package com.mycompany.project_yml.repository;
 import com.mycompany.project_yml.domain.Cliente;
 import com.mycompany.project_yml.domain.Cuenta;
 import com.mycompany.project_yml.domain.TipoDocumento;
+import com.mycompany.project_yml.domain.TipoDocumentoEmbedded;
 import com.mycompany.project_yml.domain.enumeration.Estado;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,13 @@ class CuentaRepositoryTest {
         assertNotNull(tipoDocumentoCedula);
 
         Cliente cliente = new Cliente(null, "123456789", "John", "Doe", "Smith", "Johnson");
-        Cliente cliente2 = new Cliente(null, "99999", "John", "Doe", "Smith", "Johnson");
+        Cliente cliente2 = new Cliente(null, "123456789", "John", "Doe", "Smith", "Johnson");
+        //Cliente cliente2 = new Cliente(null, "99999", "John", "Doe", "Smith", "Johnson");
 
+        TipoDocumentoEmbedded tipoDocumentoEmbedded = new TipoDocumentoEmbedded(tipoDocumentoCedula.getSigla(), tipoDocumentoCedula.getNombreDocumento());
 
-        cliente.setTipoDocumento(tipoDocumentoCedula);
-        cliente2.setTipoDocumento(tipoDocumentoCedula);
+        cliente.setTipoDocumentoEmbedded(tipoDocumentoEmbedded);
+        cliente2.setTipoDocumentoEmbedded(tipoDocumentoEmbedded);
 
         Cliente clienteGuardado = clienteRepository.insert(cliente);
         Cliente clienteGuardado2 = clienteRepository.insert(cliente2);
