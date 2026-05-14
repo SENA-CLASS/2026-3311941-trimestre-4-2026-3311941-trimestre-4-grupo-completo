@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Document(collection = "cliente")
 public class Cliente implements Serializable {
@@ -125,5 +126,17 @@ public class Cliente implements Serializable {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Cliente cliente)) return false;
+
+        return Objects.equals(id, cliente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
