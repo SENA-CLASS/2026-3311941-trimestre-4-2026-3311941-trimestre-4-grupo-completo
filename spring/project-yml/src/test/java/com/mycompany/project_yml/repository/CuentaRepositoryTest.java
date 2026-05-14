@@ -30,8 +30,8 @@ class CuentaRepositoryTest {
 
     @Test
     void insert(){
-        mongoTemplate.dropCollection(Cliente.class);
-        mongoTemplate.dropCollection(Cuenta.class);
+        clienteRepository.deleteAll();
+        cuentaRepository.deleteAll();
         tipoDocumentoRepository.deleteAll();
 
         TipoDocumento tipoDocumentoCedula = tipoDocumentoRepository.insert(
@@ -41,7 +41,7 @@ class CuentaRepositoryTest {
         assertNotNull(tipoDocumentoCedula);
 
         Cliente cliente = new Cliente(null, "123456789", "John", "Doe", "Smith", "Johnson");
-        Cliente cliente2 = new Cliente(null, "123456789", "John", "Doe", "Smith", "Johnson");
+        Cliente cliente2 = new Cliente(null, "1234567890", "John", "Doe", "Smith", "Johnson");
         //Cliente cliente2 = new Cliente(null, "99999", "John", "Doe", "Smith", "Johnson");
 
         TipoDocumentoEmbedded tipoDocumentoEmbedded = new TipoDocumentoEmbedded(tipoDocumentoCedula.getSigla(), tipoDocumentoCedula.getNombreDocumento());

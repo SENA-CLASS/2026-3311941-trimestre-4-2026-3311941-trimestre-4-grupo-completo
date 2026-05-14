@@ -13,9 +13,9 @@ import java.io.Serializable;
 
 @Document(collection = "cliente")
 @CompoundIndex(
-        name = "idx_unique_cliente01",
-        def = "{'numero_documento': 1, 'tipo_documento.sigla': 1}",
-       unique = true
+        name = "idx_unique_cliente",
+        def = "{'numero_documento': 1, 'tipo_documento': 1}",
+        unique = true
 )
 public class Cliente implements Serializable {
 
