@@ -6,12 +6,20 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Document(collection = "factura")
 @CompoundIndex(name = "ixd_unique_factura", def = "{'numeroFactura': 1, 'anio': 1}", unique = true)
-public class Factura {
+public class Factura implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String id;
     private long numeroFactura;
     private int anio;
@@ -24,6 +32,8 @@ public class Factura {
     @Field("cliente")
     @JsonIgnoreProperties(value = { "tipoDocumento", "cuenta", "facturas" }, allowSetters = true)
     private Cliente cliente;
+
+    private Set<ProductoEmbedded> productos = new HashSet<>();
 
     public Factura(String id, long numeroFactura, int anio, Date fecha, double total, double iva, double subtotal) {
         this.id = id;
@@ -97,6 +107,14 @@ public class Factura {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Set<ProductoEmbedded> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<ProductoEmbedded> productos) {
+        this.productos = productos;
     }
 
     @Override
