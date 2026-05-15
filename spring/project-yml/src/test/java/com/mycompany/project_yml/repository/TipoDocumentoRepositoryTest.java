@@ -17,6 +17,8 @@ class TipoDocumentoRepositoryTest {
 
     @Test
     void insert(){
+        tipoDocumentoRepository.deleteAll();
+
         TipoDocumento tipoDocumento = new TipoDocumento(null,"CC", "Cedula de ciudadania", Estado.ACTIVO);
         tipoDocumentoRepository.insert(tipoDocumento);
 
