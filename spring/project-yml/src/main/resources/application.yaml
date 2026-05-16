@@ -1,7 +1,8 @@
 spring:
   application:
     name: project-yml
-
+server:
+  port: 8080
 # Database configuration
   mongodb:
     host: localhost
