@@ -1,8 +1,6 @@
 spring:
   application:
     name: project-yml
-server:
-  port: 8080
 # Database configuration
   mongodb:
     host: localhost
@@ -13,3 +11,6 @@ server:
   data:
     mongodb:
       auto-index-creation: true
+
+server:
+  port: 8080

@@ -2,17 +2,22 @@ package com.mycompany.project_yml.web.rest;
 
 import com.mycompany.project_yml.domain.TipoDocumento;
 import com.mycompany.project_yml.repository.TipoDocumentoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
 public class TipoDocumentoResource {
 
-    private final TipoDocumentoRepository tipoDocumentoRepository;;
+    private final TipoDocumentoRepository tipoDocumentoRepository;
+
+    private static final Logger LOG = LoggerFactory.getLogger(TipoDocumentoResource.class);
 
     public TipoDocumentoResource(TipoDocumentoRepository tipoDocumentoRepository) {
         this.tipoDocumentoRepository = tipoDocumentoRepository;
@@ -20,9 +25,14 @@ public class TipoDocumentoResource {
 
     // POST /api/document-types
     @PostMapping("/tipo-documentos") // endpoint to create a new document type
-    public String createTipoDocumento(@RequestBody TipoDocumento documentType) {
-        System.out.println("se crea: "+documentType.toString());
-        return "CREATE DOCUMENT TYPE";
+    public ResponseEntity<TipoDocumento> createTipoDocumento(@RequestBody TipoDocumento documentType) throws URISyntaxException {
+        LOG.debug("se crea: {}", documentType);
+        if(documentType.getId() != null){
+            return ResponseEntity.badRequest().build();
+        }else {
+            TipoDocumento tipoDocumentoSaved = tipoDocumentoRepository.insert(documentType);
+            return ResponseEntity.created(new URI("api/tipo-documentos/" + tipoDocumentoSaved.getId())).body(tipoDocumentoSaved);
+        }
     }
 
     // PUT /api/document-types
