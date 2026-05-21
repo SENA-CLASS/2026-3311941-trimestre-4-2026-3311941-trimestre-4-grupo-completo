@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,8 +78,10 @@ public class TipoDocumentoResource {
 
     // DELETE /api/document-types/{id}
     @DeleteMapping("/tipo-documentos/{id}") // endpoint to delete a document type by id
-    public String deleteTipoDocumento(@PathVariable("id") Long id) {
-        return "DELETE DOCUMENT TYPE BY ID: " + id;
+    public ResponseEntity<Void> deleteTipoDocumento(@PathVariable("id") String id) {
+        LOG.debug("se borro el id: {}", id);
+        tipoDocumentoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 
