@@ -61,6 +61,7 @@ public class TipoDocumentoResource {
     // GET /api/document-types
     @GetMapping("/tipo-documentos") // endpoint to get all document types
     public ResponseEntity<List<TipoDocumento>> getTipoDocumento() {
+        LOG.debug("se buscan todos los tipos de documentos");
         List<TipoDocumento> tipoDocumentos = tipoDocumentoRepository.findAll();
         return ResponseEntity.ok().body(tipoDocumentos);
     }
@@ -68,6 +69,7 @@ public class TipoDocumentoResource {
     // GET /api/document-types/{id}
     @GetMapping("/tipo-documentos/{id}") // endpoint to get a document type by id
     public ResponseEntity<TipoDocumento> getTipoDocumentoById(@PathVariable("id") String id) {
+        LOG.debug("se busca el id: {}", id);
         if(id == null){
             return ResponseEntity.badRequest().build();
         }else{
