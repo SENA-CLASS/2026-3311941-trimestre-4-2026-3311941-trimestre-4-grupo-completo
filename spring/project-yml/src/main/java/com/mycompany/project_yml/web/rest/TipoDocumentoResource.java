@@ -55,7 +55,6 @@ public class TipoDocumentoResource {
         } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 
     // GET /api/document-types
@@ -67,8 +66,13 @@ public class TipoDocumentoResource {
 
     // GET /api/document-types/{id}
     @GetMapping("/tipo-documentos/{id}") // endpoint to get a document type by id
-    public String getTipoDocumentoById(@PathVariable("id") Long id) {
-        return "GET DOCUMENT TYPE BY ID: " + id;
+    public ResponseEntity<TipoDocumento> getTipoDocumentoById(@PathVariable("id") String id) {
+        if(id == null){
+            return ResponseEntity.badRequest().build();
+        }else{
+            Optional<TipoDocumento> tipoDocumento = tipoDocumentoRepository.findById(id);
+            return tipoDocumento.map(documento -> ResponseEntity.ok().body(documento)).orElseGet(() -> ResponseEntity.badRequest().build());
+        }
     }
 
     // DELETE /api/document-types/{id}
