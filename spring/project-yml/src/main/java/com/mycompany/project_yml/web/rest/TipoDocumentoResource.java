@@ -2,6 +2,7 @@ package com.mycompany.project_yml.web.rest;
 
 import com.mycompany.project_yml.domain.TipoDocumento;
 import com.mycompany.project_yml.repository.TipoDocumentoRepository;
+import com.mycompany.project_yml.service.TipoDocumentoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,13 @@ public class TipoDocumentoResource {
 
     private final TipoDocumentoRepository tipoDocumentoRepository;
 
+    private final TipoDocumentoService tipoDocumentoService;
+
     private static final Logger LOG = LoggerFactory.getLogger(TipoDocumentoResource.class);
 
-    public TipoDocumentoResource(TipoDocumentoRepository tipoDocumentoRepository) {
+    public TipoDocumentoResource(TipoDocumentoRepository tipoDocumentoRepository, TipoDocumentoService tipoDocumentoService) {
         this.tipoDocumentoRepository = tipoDocumentoRepository;
+        this.tipoDocumentoService = tipoDocumentoService;
     }
 
     // POST /api/document-types
@@ -32,7 +36,7 @@ public class TipoDocumentoResource {
         if (tipoDocumento.getId() != null) {
             return ResponseEntity.badRequest().build();
         } else {
-            TipoDocumento tipoDocumentoSaved = tipoDocumentoRepository.insert(tipoDocumento);
+            TipoDocumento tipoDocumentoSaved = tipoDocumentoService.save(tipoDocumento);
             return ResponseEntity.created(new URI("api/tipo-documentos/" + tipoDocumentoSaved.getId())).body(tipoDocumentoSaved);
         }
     }
