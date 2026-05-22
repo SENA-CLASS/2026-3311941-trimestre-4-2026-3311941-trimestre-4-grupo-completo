@@ -66,7 +66,7 @@ public class TipoDocumentoResource {
     @GetMapping("/tipo-documentos") // endpoint to get all document types
     public ResponseEntity<List<TipoDocumento>> getTipoDocumento() {
         LOG.debug("se buscan todos los tipos de documentos");
-        List<TipoDocumento> tipoDocumentos = tipoDocumentoRepository.findAll();
+        List<TipoDocumento> tipoDocumentos = tipoDocumentoService.findAll();
         return ResponseEntity.ok().body(tipoDocumentos);
     }
 
