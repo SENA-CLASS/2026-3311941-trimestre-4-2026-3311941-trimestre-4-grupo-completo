@@ -3,6 +3,7 @@ package com.mycompany.project_yml.web.rest;
 import com.mycompany.project_yml.domain.TipoDocumento;
 import com.mycompany.project_yml.repository.TipoDocumentoRepository;
 import com.mycompany.project_yml.service.TipoDocumentoService;
+import com.mycompany.project_yml.service.dto.TipoDocumentoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class TipoDocumentoResource {
 
     // POST /api/document-types
     @PostMapping("/tipo-documentos") // endpoint to create a new document type
-    public ResponseEntity<TipoDocumento> createTipoDocumento(@RequestBody TipoDocumento tipoDocumento) throws URISyntaxException {
+    public ResponseEntity<TipoDocumentoDTO> createTipoDocumento(@RequestBody TipoDocumento tipoDocumento) throws URISyntaxException {
         LOG.debug("se crea: {}", tipoDocumento);
         if (tipoDocumento.getId() != null) {
             return ResponseEntity.badRequest().build();
