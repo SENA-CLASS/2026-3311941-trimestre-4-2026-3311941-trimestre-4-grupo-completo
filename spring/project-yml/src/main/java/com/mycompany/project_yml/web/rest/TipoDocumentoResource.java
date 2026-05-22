@@ -53,9 +53,9 @@ public class TipoDocumentoResource {
         if (!tipoDocumento.getId().equals(id)) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<TipoDocumento> tipoDocumentoUpdated = tipoDocumentoRepository.findById(id);
+        Optional<TipoDocumento> tipoDocumentoUpdated = tipoDocumentoService.findOne(id);
         if (tipoDocumentoUpdated.isPresent()) {
-            TipoDocumento tipoDocumentoSaved = tipoDocumentoRepository.save(tipoDocumento);
+            TipoDocumento tipoDocumentoSaved = tipoDocumentoService.update(tipoDocumento);
             return ResponseEntity.ok().body(tipoDocumentoSaved);
         } else {
             return ResponseEntity.notFound().build();

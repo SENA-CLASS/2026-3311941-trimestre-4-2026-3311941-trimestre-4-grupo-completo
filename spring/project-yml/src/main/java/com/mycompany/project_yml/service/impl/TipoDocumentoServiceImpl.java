@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TipoDocumentoServiceImpl implements TipoDocumentoService {
 
@@ -19,5 +21,14 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
     @Override
     public TipoDocumento save(TipoDocumento tipoDocumento){
         return tipoDocumentoRepository.insert(tipoDocumento);
+    }
+
+    public TipoDocumento update(TipoDocumento tipoDocumento){
+        return tipoDocumentoRepository.save(tipoDocumento);
+    }
+
+    @Override
+    public Optional<TipoDocumento> findOne(String id){
+        return tipoDocumentoRepository.findById(id);
     }
 }
