@@ -18,14 +18,11 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class TipoDocumentoResource {
 
-    private final TipoDocumentoRepository tipoDocumentoRepository;
-
     private final TipoDocumentoService tipoDocumentoService;
 
     private static final Logger LOG = LoggerFactory.getLogger(TipoDocumentoResource.class);
 
-    public TipoDocumentoResource(TipoDocumentoRepository tipoDocumentoRepository, TipoDocumentoService tipoDocumentoService) {
-        this.tipoDocumentoRepository = tipoDocumentoRepository;
+    public TipoDocumentoResource(TipoDocumentoService tipoDocumentoService) {
         this.tipoDocumentoService = tipoDocumentoService;
     }
 
@@ -77,7 +74,7 @@ public class TipoDocumentoResource {
         if(id == null){
             return ResponseEntity.badRequest().build();
         }else{
-            Optional<TipoDocumento> tipoDocumento = tipoDocumentoRepository.findById(id);
+            Optional<TipoDocumento> tipoDocumento = tipoDocumentoService.findOne(id);
             return tipoDocumento.map(documento -> ResponseEntity.ok().body(documento)).orElseGet(() -> ResponseEntity.badRequest().build());
         }
     }
@@ -86,7 +83,7 @@ public class TipoDocumentoResource {
     @DeleteMapping("/tipo-documentos/{id}") // endpoint to delete a document type by id
     public ResponseEntity<Void> deleteTipoDocumento(@PathVariable("id") String id) {
         LOG.debug("se borro el id: {}", id);
-        tipoDocumentoRepository.deleteById(id);
+        tipoDocumentoService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

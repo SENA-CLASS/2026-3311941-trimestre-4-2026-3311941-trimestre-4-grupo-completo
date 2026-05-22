@@ -10,4 +10,5 @@ public interface TipoDocumentoService {
     TipoDocumento update(TipoDocumento tipoDocumento);
     Optional<TipoDocumento> findOne(String id);
     List<TipoDocumento> findAll();
+    void delete(String id);
 }

@@ -38,4 +38,9 @@ public class TipoDocumentoServiceImpl implements TipoDocumentoService {
     public List<TipoDocumento> findAll(){
         return tipoDocumentoRepository.findAll();
     }
+
+    @Override
+    public void delete(String id){
+        tipoDocumentoRepository.deleteById(id);
+    }
 }
