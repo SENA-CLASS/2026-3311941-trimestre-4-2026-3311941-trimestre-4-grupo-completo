@@ -1,0 +1,32 @@
+application {
+    config {
+        baseName ejemplo02
+        applicationType monolith
+        packageName com.mycompany.ejemplo02
+        authenticationType jwt
+        databaseType mongodb
+        devDatabaseType mongodb
+        prodDatabaseType mongodb
+        cacheProvider no
+        buildTool maven
+        clientFramework react
+        enableTranslation false
+        nativeLanguage es
+        languages [es]
+        websocket false
+        testFrameworks [cucumber]
+        //entitySuffix false
+        jhiPrefix project
+        reactive false
+        serverPort 8080
+        searchEngine false
+        clientTheme cyborg
+        clientThemeVariant primary
+    }
+    entities *
+}
+
+dto * with mapstruct
+service * with serviceImpl
+//paginate * with pagination
+//search * with elasticsearch
