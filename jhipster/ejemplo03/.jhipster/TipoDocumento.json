@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20260529003153"
+  },
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sigla",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "nombreDocumento",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "Estado",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVO,INACTIVO"
+    }
+  ],
+  "name": "TipoDocumento",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
