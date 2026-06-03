@@ -1,0 +1,60 @@
+/** Product sold by the Online store */
+application {
+    config {
+        baseName ejemplo04
+        applicationType monolith
+        packageName com.mycompany.ejemplo04
+        authenticationType jwt
+        databaseType mongodb
+        devDatabaseType mongodb
+        prodDatabaseType mongodb
+        cacheProvider no
+        buildTool maven
+        clientFramework react
+        enableTranslation false
+        nativeLanguage es
+        languages [es]
+        websocket false
+        testFrameworks [cucumber]
+        //entitySuffix false
+        jhiPrefix project
+        reactive false
+        serverPort 8080
+        searchEngine false
+        clientTheme cyborg
+        clientThemeVariant primary
+    }
+    entities *
+}
+
+enum Estado{
+	ACTIVO(Activo),
+    INACTIVO(Inactivo)
+}
+
+entity TipoDocumento{
+	sigla String required maxlength(20) unique
+    nombreDocumento String required maxlength(100) unique
+    estado Estado required
+}
+
+entity Cuenta{
+	numeroDocumento String required maxlength(50)
+    primerNombre String required maxlength(50)
+    segundoNombre String maxlength(50)
+    primerApellido String maxlength(50) required
+    segundoApellido String maxlength(50)
+}
+
+relationship OneToMany {
+	TipoDocumento to Cuenta{tipoDocumento(nombreDocumento) required}    
+}
+
+relationship OneToOne {
+	Cuenta{user(login) required} to User with builtInEntity
+}
+
+dto * with mapstruct
+service * with serviceImpl
+paginate Cuenta with pagination
+//search * with elasticsearch
