@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-course-planning-heading"
+        data-cy="CoursePlanningCreateUpdateHeading"
+        ceetTranslate="ceetApp.coursePlanning.home.createOrEditLabel"
+      >
+        Crear o editar Course Planning
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let stateCoursePlanningRef = editForm.get('stateCoursePlanning')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_stateCoursePlanning" ceetTranslate="ceetApp.coursePlanning.stateCoursePlanning"
+            >State Course Planning</label
+          >
+          <select
+            class="form-control"
+            name="stateCoursePlanning"
+            formControlName="stateCoursePlanning"
+            id="field_stateCoursePlanning"
+            data-cy="stateCoursePlanning"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (stateCoursePlanningRef.invalid && (stateCoursePlanningRef.dirty || stateCoursePlanningRef.touched)) {
+            <div>
+              @if (editForm.get('stateCoursePlanning')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_course" ceetTranslate="ceetApp.coursePlanning.course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="compareCourse"
+          >
+            @if (editForm.get(['course'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (courseOption of coursesSharedCollection(); track $index) {
+              <option [ngValue]="courseOption">{{ courseOption.courseNumber }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['course'])!.invalid && (editForm.get(['course'])!.dirty || editForm.get(['course'])!.touched)) {
+          <div>
+            @if (editForm.get(['course'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_planning" ceetTranslate="ceetApp.coursePlanning.planning">Planning</label>
+          <select
+            class="form-control"
+            id="field_planning"
+            data-cy="planning"
+            name="planning"
+            formControlName="planning"
+            [compareWith]="comparePlanning"
+          >
+            @if (editForm.get(['planning'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (planningOption of planningsSharedCollection(); track $index) {
+              <option [ngValue]="planningOption">{{ planningOption.planningCode }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['planning'])!.invalid && (editForm.get(['planning'])!.dirty || editForm.get(['planning'])!.touched)) {
+          <div>
+            @if (editForm.get(['planning'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

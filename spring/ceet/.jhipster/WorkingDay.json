@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20260508013034"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "startTime",
+      "fieldType": "Duration",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Duration",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "WorkingDay",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nameWorkingDay",
+      "otherEntityName": "instructorWorkingDay",
+      "relationshipName": "instructorWorkingDay",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "dayName",
+      "otherEntityName": "day",
+      "relationshipName": "day",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

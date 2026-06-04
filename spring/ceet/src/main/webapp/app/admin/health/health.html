@@ -1,0 +1,62 @@
+<div>
+  <h2>
+    <span id="health-page-heading" data-cy="healthPageHeading" ceetTranslate="health.title">Control de salud</span>
+
+    <button class="btn btn-primary float-end" (click)="refresh()">
+      <fa-icon icon="sync" /> <span ceetTranslate="health.refresh.button">Refrescar</span>
+    </button>
+  </h2>
+
+  <div class="table-responsive">
+    <table id="healthCheck" class="table table-striped" aria-describedby="health-page-heading">
+      <thead>
+        <tr>
+          <th scope="col" ceetTranslate="health.table.service">Nombre del servicio</th>
+          <th scope="col" class="text-center" ceetTranslate="health.table.status">Estado</th>
+          <th scope="col" class="text-center" ceetTranslate="health.details.details">Detalles</th>
+        </tr>
+      </thead>
+      @if (health(); as health) {
+        <tbody>
+          @for (componentHealth of health.components | keyvalue; track componentHealth.key) {
+            <tr>
+              <td [ceetTranslate]="'health.indicator.' + componentHealth.key">
+                {{
+                  {
+                    diskSpace: 'Espacio en disco',
+                    ssl: 'SSL',
+                    mail: 'Correo Electrónico',
+                    livenessState: 'Liveness state',
+                    readinessState: 'Readiness state',
+                    ping: 'Aplicación',
+                    mongo: 'MongoDB',
+                  }[componentHealth.key] || componentHealth.key
+                }}
+              </td>
+              <td class="text-center">
+                <span
+                  class="badge"
+                  [class]="getBadgeClass(componentHealth.value!.status)"
+                  [ceetTranslate]="'health.status.' + (componentHealth.value?.status ?? 'UNKNOWN')"
+                >
+                  {{
+                    { UNKNOWN: 'DESCONOCIDO', UP: 'LEVANTADO', OUT_OF_SERVICE: 'FUERA_DE_SERVICIO', DOWN: 'CAÍDO' }[
+                      componentHealth.value?.status ?? 'UNKNOWN'
+                    ]
+                  }}
+                </span>
+              </td>
+              <td class="text-center">
+                @if (componentHealth.value!.details) {
+                  <a class="hand" (click)="showHealth({ key: componentHealth.key, value: componentHealth.value! })">
+                    <fa-icon icon="eye" />
+                  </a>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      }
+    </table>
+  </div>
+</div>

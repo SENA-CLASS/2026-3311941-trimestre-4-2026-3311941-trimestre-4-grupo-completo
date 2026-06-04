@@ -1,0 +1,142 @@
+<div>
+  <h2 id="page-heading" data-cy="GroupResponseHeading">
+    <span ceetTranslate="ceetApp.groupResponse.home.title">Group Responses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.groupResponse.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-group-response"
+        [routerLink]="['/group-response/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.groupResponse.home.createLabel">Crear nuevo Group Response</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (groupResponses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.groupResponse.home.notFound">Ningún Group Responses encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="evaluationDate">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.groupResponse.evaluationDate">Evaluation Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="projectGroup.id">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.groupResponse.projectGroup">Project Group</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="assessment.assessmentType">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.groupResponse.assessment">Assessment</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="itemList.id">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.groupResponse.itemList">Item List</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (groupResponse of groupResponses(); track trackId(groupResponse)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/group-response', groupResponse.id, 'view']">{{ groupResponse.id }}</a>
+              </td>
+              <td>{{ groupResponse.evaluationDate | formatMediumDatetime }}</td>
+              <td>
+                @if (groupResponse.projectGroup) {
+                  <div>
+                    <a [routerLink]="['/project-group', groupResponse.projectGroup.id, 'view']">{{ groupResponse.projectGroup.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (groupResponse.assessment) {
+                  <div>
+                    <a [routerLink]="['/assessment', groupResponse.assessment.id, 'view']">{{ groupResponse.assessment.assessmentType }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (groupResponse.itemList) {
+                  <div>
+                    <a [routerLink]="['/item-list', groupResponse.itemList.id, 'view']">{{ groupResponse.itemList.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/group-response', groupResponse.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/group-response', groupResponse.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(groupResponse)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (groupResponses().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

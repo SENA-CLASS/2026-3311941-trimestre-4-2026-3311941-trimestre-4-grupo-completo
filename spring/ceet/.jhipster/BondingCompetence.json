@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20260508012934"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "BondingCompetence",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "bondingInstructor",
+      "relationshipName": "bondingInstructor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "learningCompetence",
+      "relationshipName": "learningCompetence",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

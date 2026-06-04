@@ -1,0 +1,30 @@
+{
+  "ceetApp": {
+    "learningResult": {
+      "home": {
+        "title": "Learning Results",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Learning Result",
+        "createOrEditLabel": "Crear o editar Learning Result",
+        "notFound": "Ningún Learning Results encontrado"
+      },
+      "created": "Un nuevo Learning Result ha sido creado con el identificador {{ param }}",
+      "updated": "Un Learning Result ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Learning Result ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Learning Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Learning Result"
+      },
+      "id": "ID",
+      "resultCode": "Result Code",
+      "denomination": "Denomination",
+      "quarterSchedule": "Quarter Schedule",
+      "classroomLimitation": "Classroom Limitation",
+      "itemList": "Item List",
+      "viewedResult": "Viewed Result",
+      "learningCompetence": "Learning Competence"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "ceetApp": {
+    "instructorWorkingDay": {
+      "home": {
+        "title": "Instructor Working Days",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Instructor Working Day",
+        "createOrEditLabel": "Crear o editar Instructor Working Day",
+        "notFound": "Ningún Instructor Working Days encontrado"
+      },
+      "created": "Un nuevo Instructor Working Day ha sido creado con el identificador {{ param }}",
+      "updated": "Un Instructor Working Day ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Instructor Working Day ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Instructor Working Day {{ id }}?"
+      },
+      "detail": {
+        "title": "Instructor Working Day"
+      },
+      "id": "ID",
+      "nameWorkingDay": "Name Working Day",
+      "descriptionWorkingDay": "Description Working Day",
+      "workingDayState": "Working Day State",
+      "boundingSchedule": "Bounding Schedule",
+      "workingDay": "Working Day"
+    }
+  }
+}

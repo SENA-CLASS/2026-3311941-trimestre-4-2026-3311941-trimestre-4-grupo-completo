@@ -1,0 +1,160 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-working-day-course-heading"
+        data-cy="WorkingDayCourseCreateUpdateHeading"
+        ceetTranslate="ceetApp.workingDayCourse.home.createOrEditLabel"
+      >
+        Crear o editar Working Day Course
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let workingDayAcronymRef = editForm.get('workingDayAcronym')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_workingDayAcronym" ceetTranslate="ceetApp.workingDayCourse.workingDayAcronym"
+            >Working Day Acronym</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="workingDayAcronym"
+            id="field_workingDayAcronym"
+            data-cy="workingDayAcronym"
+            formControlName="workingDayAcronym"
+          />
+          @if (workingDayAcronymRef.invalid && (workingDayAcronymRef.dirty || workingDayAcronymRef.touched)) {
+            <div>
+              @if (editForm.get('workingDayAcronym')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('workingDayAcronym')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '20' }"
+                  >Este campo no puede superar más de 20 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let workingDayNameRef = editForm.get('workingDayName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_workingDayName" ceetTranslate="ceetApp.workingDayCourse.workingDayName"
+            >Working Day Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="workingDayName"
+            id="field_workingDayName"
+            data-cy="workingDayName"
+            formControlName="workingDayName"
+          />
+          @if (workingDayNameRef.invalid && (workingDayNameRef.dirty || workingDayNameRef.touched)) {
+            <div>
+              @if (editForm.get('workingDayName')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('workingDayName')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" ceetTranslate="ceetApp.workingDayCourse.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo no puede superar más de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let imageUrlRef = editForm.get('imageUrl')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_imageUrl" ceetTranslate="ceetApp.workingDayCourse.imageUrl">Image Url</label>
+          <input type="text" class="form-control" name="imageUrl" id="field_imageUrl" data-cy="imageUrl" formControlName="imageUrl" />
+          @if (imageUrlRef.invalid && (imageUrlRef.dirty || imageUrlRef.touched)) {
+            <div>
+              @if (editForm.get('imageUrl')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo no puede superar más de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let stateWorkingDayRef = editForm.get('stateWorkingDay')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_stateWorkingDay" ceetTranslate="ceetApp.workingDayCourse.stateWorkingDay"
+            >State Working Day</label
+          >
+          <select
+            class="form-control"
+            name="stateWorkingDay"
+            formControlName="stateWorkingDay"
+            id="field_stateWorkingDay"
+            data-cy="stateWorkingDay"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (stateWorkingDayRef.invalid && (stateWorkingDayRef.dirty || stateWorkingDayRef.touched)) {
+            <div>
+              @if (editForm.get('stateWorkingDay')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

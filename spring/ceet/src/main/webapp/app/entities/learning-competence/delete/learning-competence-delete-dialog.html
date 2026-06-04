@@ -1,0 +1,30 @@
+@if (learningCompetence) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(learningCompetence.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="learningCompetenceDeleteDialogHeading" ceetTranslate="entity.delete.title">
+        Confirmar operación de borrado
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <ceet-alert-error />
+      <p
+        id="ceet-delete-learningCompetence-heading"
+        ceetTranslate="ceetApp.learningCompetence.delete.question"
+        [translateValues]="{ id: learningCompetence.id }"
+      >
+        ¿Seguro que quiere eliminar Learning Competence {{ learningCompetence.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="ceet-confirm-delete-learningCompetence" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span ceetTranslate="entity.action.delete">Eliminar</span>
+      </button>
+    </div>
+  </form>
+}

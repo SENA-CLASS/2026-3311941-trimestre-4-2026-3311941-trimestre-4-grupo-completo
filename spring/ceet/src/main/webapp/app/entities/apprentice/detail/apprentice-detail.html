@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (apprentice(); as apprenticeRef) {
+      <div>
+        <h2 data-cy="apprenticeDetailsHeading"><span ceetTranslate="ceetApp.apprentice.detail.title">Apprentice</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ apprenticeRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.apprentice.customer">Customer</span></dt>
+          <dd>
+            @if (apprentice()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', apprentice()!.customer?.id, 'view']">{{ apprenticeRef.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.apprentice.trainingStatus">Training Status</span></dt>
+          <dd>
+            @if (apprentice()!.trainingStatus) {
+              <div>
+                <a [routerLink]="['/training-status', apprentice()!.trainingStatus?.id, 'view']">{{
+                  apprenticeRef.trainingStatus?.statusName
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.apprentice.course">Course</span></dt>
+          <dd>
+            @if (apprentice()!.course) {
+              <div>
+                <a [routerLink]="['/course', apprentice()!.course?.id, 'view']">{{ apprenticeRef.course?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/apprentice', apprenticeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

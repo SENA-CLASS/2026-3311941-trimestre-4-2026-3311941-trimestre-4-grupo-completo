@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ceet-bonding-heading" data-cy="BondingCreateUpdateHeading" ceetTranslate="ceetApp.bonding.home.createOrEditLabel">
+        Crear o editar Bonding
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let bondingTypeRef = editForm.get('bondingType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bondingType" ceetTranslate="ceetApp.bonding.bondingType">Bonding Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="bondingType"
+            id="field_bondingType"
+            data-cy="bondingType"
+            formControlName="bondingType"
+          />
+          @if (bondingTypeRef.invalid && (bondingTypeRef.dirty || bondingTypeRef.touched)) {
+            <div>
+              @if (editForm.get('bondingType')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('bondingType')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let workingHoursRef = editForm.get('workingHours')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_workingHours" ceetTranslate="ceetApp.bonding.workingHours">Working Hours</label>
+          <input
+            type="number"
+            class="form-control"
+            name="workingHours"
+            id="field_workingHours"
+            data-cy="workingHours"
+            formControlName="workingHours"
+          />
+          @if (workingHoursRef.invalid && (workingHoursRef.dirty || workingHoursRef.touched)) {
+            <div>
+              @if (editForm.get('workingHours')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('workingHours')?.errors?.number"
+                ceetTranslate="entity.validation.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let bondingStateRef = editForm.get('bondingState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bondingState" ceetTranslate="ceetApp.bonding.bondingState">Bonding State</label>
+          <select class="form-control" name="bondingState" formControlName="bondingState" id="field_bondingState" data-cy="bondingState">
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (bondingStateRef.invalid && (bondingStateRef.dirty || bondingStateRef.touched)) {
+            <div>
+              @if (editForm.get('bondingState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

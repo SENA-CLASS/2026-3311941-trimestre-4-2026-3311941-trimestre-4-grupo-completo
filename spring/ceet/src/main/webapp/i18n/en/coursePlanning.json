@@ -1,0 +1,26 @@
+{
+  "ceetApp": {
+    "coursePlanning": {
+      "home": {
+        "title": "Course Plannings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Course Planning",
+        "createOrEditLabel": "Create or edit a Course Planning",
+        "notFound": "No Course Plannings found"
+      },
+      "created": "A new Course Planning is created with identifier {{ param }}",
+      "updated": "A Course Planning is updated with identifier {{ param }}",
+      "deleted": "A Course Planning is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Course Planning {{ id }}?"
+      },
+      "detail": {
+        "title": "Course Planning"
+      },
+      "id": "ID",
+      "stateCoursePlanning": "State Course Planning",
+      "course": "Course",
+      "planning": "Planning"
+    }
+  }
+}

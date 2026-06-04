@@ -1,0 +1,145 @@
+<div>
+  <h2 id="page-heading" data-cy="WorkingDayCourseHeading">
+    <span ceetTranslate="ceetApp.workingDayCourse.home.title">Working Day Courses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.workingDayCourse.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-working-day-course"
+        [routerLink]="['/working-day-course/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.workingDayCourse.home.createLabel">Crear nuevo Working Day Course</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (workingDayCourses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.workingDayCourse.home.notFound">Ningún Working Day Courses encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="workingDayAcronym">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.workingDayCourse.workingDayAcronym">Working Day Acronym</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="workingDayName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.workingDayCourse.workingDayName">Working Day Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="description">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.workingDayCourse.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="imageUrl">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.workingDayCourse.imageUrl">Image Url</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="stateWorkingDay">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.workingDayCourse.stateWorkingDay">State Working Day</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (workingDayCourse of workingDayCourses(); track trackId(workingDayCourse)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/working-day-course', workingDayCourse.id, 'view']">{{ workingDayCourse.id }}</a>
+              </td>
+              <td>{{ workingDayCourse.workingDayAcronym }}</td>
+              <td>{{ workingDayCourse.workingDayName }}</td>
+              <td>{{ workingDayCourse.description }}</td>
+              <td>{{ workingDayCourse.imageUrl }}</td>
+              <td [ceetTranslate]="'ceetApp.State.' + (workingDayCourse.stateWorkingDay ?? 'null')">
+                {{ { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[workingDayCourse.stateWorkingDay ?? 'null'] }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/working-day-course', workingDayCourse.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/working-day-course', workingDayCourse.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(workingDayCourse)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (workingDayCourses().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

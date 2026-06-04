@@ -1,0 +1,129 @@
+<div>
+  <h2 id="page-heading" data-cy="InstructorWorkingDayHeading">
+    <span ceetTranslate="ceetApp.instructorWorkingDay.home.title">Instructor Working Days</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.instructorWorkingDay.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-instructor-working-day"
+        [routerLink]="['/instructor-working-day/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.instructorWorkingDay.home.createLabel">Crear nuevo Instructor Working Day</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (instructorWorkingDays().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.instructorWorkingDay.home.notFound">Ningún Instructor Working Days encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="nameWorkingDay">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.instructorWorkingDay.nameWorkingDay">Name Working Day</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="descriptionWorkingDay">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.instructorWorkingDay.descriptionWorkingDay">Description Working Day</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="workingDayState">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.instructorWorkingDay.workingDayState">Working Day State</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (instructorWorkingDay of instructorWorkingDays(); track trackId(instructorWorkingDay)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/instructor-working-day', instructorWorkingDay.id, 'view']">{{ instructorWorkingDay.id }}</a>
+              </td>
+              <td>{{ instructorWorkingDay.nameWorkingDay }}</td>
+              <td>{{ instructorWorkingDay.descriptionWorkingDay }}</td>
+              <td [ceetTranslate]="'ceetApp.State.' + (instructorWorkingDay.workingDayState ?? 'null')">
+                {{ { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[instructorWorkingDay.workingDayState ?? 'null'] }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/instructor-working-day', instructorWorkingDay.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/instructor-working-day', instructorWorkingDay.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(instructorWorkingDay)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (instructorWorkingDays().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

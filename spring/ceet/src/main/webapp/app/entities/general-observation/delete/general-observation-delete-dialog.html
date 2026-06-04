@@ -1,0 +1,30 @@
+@if (generalObservation) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(generalObservation.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="generalObservationDeleteDialogHeading" ceetTranslate="entity.delete.title">
+        Confirmar operación de borrado
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <ceet-alert-error />
+      <p
+        id="ceet-delete-generalObservation-heading"
+        ceetTranslate="ceetApp.generalObservation.delete.question"
+        [translateValues]="{ id: generalObservation.id }"
+      >
+        ¿Seguro que quiere eliminar General Observation {{ generalObservation.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="ceet-confirm-delete-generalObservation" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span ceetTranslate="entity.action.delete">Eliminar</span>
+      </button>
+    </div>
+  </form>
+}

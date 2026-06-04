@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20260508012134"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "yearNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "yearState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Year",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "bondingInstructor",
+      "otherEntityRelationshipName": "year",
+      "relationshipName": "bondingInstructor",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "currentQuarter",
+      "otherEntityRelationshipName": "year",
+      "relationshipName": "currentQuarter",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

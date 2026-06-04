@@ -1,0 +1,158 @@
+<div>
+  <h2 id="page-heading" data-cy="BondingInstructorHeading">
+    <span ceetTranslate="ceetApp.bondingInstructor.home.title">Bonding Instructors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.bondingInstructor.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bonding-instructor"
+        [routerLink]="['/bonding-instructor/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.bondingInstructor.home.createLabel">Crear nuevo Bonding Instructor</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (bondingInstructors().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.bondingInstructor.home.notFound">Ningún Bonding Instructors encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="startTime">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.bondingInstructor.startTime">Start Time</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="endTime">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.bondingInstructor.endTime">End Time</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="year.yearNumber">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.bondingInstructor.year">Year</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="instructor.id">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.bondingInstructor.instructor">Instructor</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="bonding.bondingType">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.bondingInstructor.bonding">Bonding</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (bondingInstructor of bondingInstructors(); track trackId(bondingInstructor)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/bonding-instructor', bondingInstructor.id, 'view']">{{ bondingInstructor.id }}</a>
+              </td>
+              <td>{{ bondingInstructor.startTime | formatMediumDate }}</td>
+              <td>{{ bondingInstructor.endTime | formatMediumDate }}</td>
+              <td>
+                @if (bondingInstructor.year) {
+                  <div>
+                    <a [routerLink]="['/year', bondingInstructor.year.id, 'view']">{{ bondingInstructor.year.yearNumber }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (bondingInstructor.instructor) {
+                  <div>
+                    <a [routerLink]="['/instructor', bondingInstructor.instructor.id, 'view']">{{ bondingInstructor.instructor.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (bondingInstructor.bonding) {
+                  <div>
+                    <a [routerLink]="['/bonding', bondingInstructor.bonding.id, 'view']">{{ bondingInstructor.bonding.bondingType }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/bonding-instructor', bondingInstructor.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/bonding-instructor', bondingInstructor.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(bondingInstructor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (bondingInstructors().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

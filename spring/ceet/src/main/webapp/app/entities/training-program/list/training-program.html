@@ -1,0 +1,160 @@
+<div>
+  <h2 id="page-heading" data-cy="TrainingProgramHeading">
+    <span ceetTranslate="ceetApp.trainingProgram.home.title">Training Programs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.trainingProgram.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-training-program"
+        [routerLink]="['/training-program/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.trainingProgram.home.createLabel">Crear nuevo Training Program</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (trainingPrograms().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.trainingProgram.home.notFound">Ningún Training Programs encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="programCode">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.programCode">Program Code</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="programVersion">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.programVersion">Program Version</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="programName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.programName">Program Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="programInitials">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.programInitials">Program Initials</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="programState">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.programState">Program State</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="levelEducation.levelName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.trainingProgram.levelEducation">Level Education</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (trainingProgram of trainingPrograms(); track trackId(trainingProgram)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/training-program', trainingProgram.id, 'view']">{{ trainingProgram.id }}</a>
+              </td>
+              <td>{{ trainingProgram.programCode }}</td>
+              <td>{{ trainingProgram.programVersion }}</td>
+              <td>{{ trainingProgram.programName }}</td>
+              <td>{{ trainingProgram.programInitials }}</td>
+              <td [ceetTranslate]="'ceetApp.StateProgram.' + (trainingProgram.programState ?? 'null')">
+                {{ { null: '', EXECUTION: 'Ejecución', DISCONTINUED: 'Suspendido' }[trainingProgram.programState ?? 'null'] }}
+              </td>
+              <td>
+                @if (trainingProgram.levelEducation) {
+                  <div>
+                    <a [routerLink]="['/level-education', trainingProgram.levelEducation.id, 'view']">{{
+                      trainingProgram.levelEducation.levelName
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/training-program', trainingProgram.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/training-program', trainingProgram.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(trainingProgram)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (trainingPrograms().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

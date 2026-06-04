@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20260508010134"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "projectPhaseCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "projectPhaseState",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    }
+  ],
+  "name": "ProjectPhase",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "projectActivity",
+      "otherEntityRelationshipName": "projectPhase",
+      "relationshipName": "projectActivity",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "projectCode",
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

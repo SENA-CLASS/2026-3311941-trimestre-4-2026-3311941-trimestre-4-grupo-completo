@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (customer(); as customerRef) {
+      <div>
+        <h2 data-cy="customerDetailsHeading"><span ceetTranslate="ceetApp.customer.detail.title">Customer</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ customerRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.documentNumber">Document Number</span></dt>
+          <dd>
+            <span>{{ customerRef.documentNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.firstName">First Name</span></dt>
+          <dd>
+            <span>{{ customerRef.firstName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.secondName">Second Name</span></dt>
+          <dd>
+            <span>{{ customerRef.secondName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.fisrtLastName">Fisrt Last Name</span></dt>
+          <dd>
+            <span>{{ customerRef.fisrtLastName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.secondLastName">Second Last Name</span></dt>
+          <dd>
+            <span>{{ customerRef.secondLastName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.user">User</span></dt>
+          <dd>
+            <span>{{ customerRef.user?.login }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.customer.documentType">Document Type</span></dt>
+          <dd>
+            @if (customer()!.documentType) {
+              <div>
+                <a [routerLink]="['/document-type', customer()!.documentType?.id, 'view']">{{ customerRef.documentType?.documentName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/customer', customerRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

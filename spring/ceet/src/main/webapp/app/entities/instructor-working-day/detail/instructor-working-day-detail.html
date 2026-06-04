@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (instructorWorkingDay(); as instructorWorkingDayRef) {
+      <div>
+        <h2 data-cy="instructorWorkingDayDetailsHeading">
+          <span ceetTranslate="ceetApp.instructorWorkingDay.detail.title">Instructor Working Day</span>
+        </h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ instructorWorkingDayRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.instructorWorkingDay.nameWorkingDay">Name Working Day</span></dt>
+          <dd>
+            <span>{{ instructorWorkingDayRef.nameWorkingDay }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.instructorWorkingDay.descriptionWorkingDay">Description Working Day</span></dt>
+          <dd>
+            <span>{{ instructorWorkingDayRef.descriptionWorkingDay }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.instructorWorkingDay.workingDayState">Working Day State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (instructorWorkingDayRef.workingDayState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[instructorWorkingDayRef.workingDayState ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/instructor-working-day', instructorWorkingDayRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

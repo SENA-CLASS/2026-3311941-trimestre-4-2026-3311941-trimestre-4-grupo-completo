@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20260508011834"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "itemNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "question",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    }
+  ],
+  "name": "ItemList",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "groupResponse",
+      "otherEntityRelationshipName": "itemList",
+      "relationshipName": "groupResponse",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "listName",
+      "otherEntityName": "checkList",
+      "relationshipName": "checkList",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "learningResult",
+      "relationshipName": "learningResult",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

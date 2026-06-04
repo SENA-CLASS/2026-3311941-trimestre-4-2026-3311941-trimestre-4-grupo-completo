@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (day(); as dayRef) {
+      <div>
+        <h2 data-cy="dayDetailsHeading"><span ceetTranslate="ceetApp.day.detail.title">Day</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ dayRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.day.dayName">Day Name</span></dt>
+          <dd>
+            <span>{{ dayRef.dayName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.day.dayState">Day State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (dayRef.dayState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[dayRef.dayState ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/day', dayRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "ceetApp": {
+    "bondingCompetence": {
+      "home": {
+        "title": "Bonding Competences",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Bonding Competence",
+        "createOrEditLabel": "Crear o editar Bonding Competence",
+        "notFound": "Ningún Bonding Competences encontrado"
+      },
+      "created": "Un nuevo Bonding Competence ha sido creado con el identificador {{ param }}",
+      "updated": "Un Bonding Competence ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Bonding Competence ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Bonding Competence {{ id }}?"
+      },
+      "detail": {
+        "title": "Bonding Competence"
+      },
+      "id": "ID",
+      "bondingInstructor": "Bonding Instructor",
+      "learningCompetence": "Learning Competence"
+    }
+  }
+}

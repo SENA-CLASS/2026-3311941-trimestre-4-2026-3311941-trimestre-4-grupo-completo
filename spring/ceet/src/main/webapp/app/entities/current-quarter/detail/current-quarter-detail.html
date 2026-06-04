@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (currentQuarter(); as currentQuarterRef) {
+      <div>
+        <h2 data-cy="currentQuarterDetailsHeading"><span ceetTranslate="ceetApp.currentQuarter.detail.title">Current Quarter</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ currentQuarterRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.currentQuarter.scheduledQuarter">Scheduled Quarter</span></dt>
+          <dd>
+            <span>{{ currentQuarterRef.scheduledQuarter }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.currentQuarter.startQuarter">Start Quarter</span></dt>
+          <dd>
+            <span>{{ currentQuarterRef.startQuarter | formatMediumDate }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.currentQuarter.endQuarter">End Quarter</span></dt>
+          <dd>
+            <span>{{ currentQuarterRef.endQuarter | formatMediumDate }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.currentQuarter.currentQuarterState">Current Quarter State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (currentQuarterRef.currentQuarterState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[currentQuarterRef.currentQuarterState ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.currentQuarter.year">Year</span></dt>
+          <dd>
+            @if (currentQuarter()!.year) {
+              <div>
+                <a [routerLink]="['/year', currentQuarter()!.year?.id, 'view']">{{ currentQuarterRef.year?.yearNumber }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/current-quarter', currentQuarterRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (observationResponse(); as observationResponseRef) {
+      <div>
+        <h2 data-cy="observationResponseDetailsHeading">
+          <span ceetTranslate="ceetApp.observationResponse.detail.title">Observation Response</span>
+        </h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ observationResponseRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.numberObservation">Number Observation</span></dt>
+          <dd>
+            <span>{{ observationResponseRef.numberObservation }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.obsevation">Obsevation</span></dt>
+          <dd>
+            <span>{{ observationResponseRef.obsevation }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.juries">Juries</span></dt>
+          <dd>
+            <span>{{ observationResponseRef.juries }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.dateObservation">Date Observation</span></dt>
+          <dd>
+            <span>{{ observationResponseRef.dateObservation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.groupResponse">Group Response</span></dt>
+          <dd>
+            @if (observationResponse()!.groupResponse) {
+              <div>
+                <a [routerLink]="['/group-response', observationResponse()!.groupResponse?.id, 'view']">{{
+                  observationResponseRef.groupResponse?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.observationResponse.customer">Customer</span></dt>
+          <dd>
+            @if (observationResponse()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', observationResponse()!.customer?.id, 'view']">{{ observationResponseRef.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/observation-response', observationResponseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

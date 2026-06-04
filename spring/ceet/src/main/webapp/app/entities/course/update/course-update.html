@@ -1,0 +1,215 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ceet-course-heading" data-cy="CourseCreateUpdateHeading" ceetTranslate="ceetApp.course.home.createOrEditLabel">
+        Crear o editar Course
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let courseNumberRef = editForm.get('courseNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_courseNumber" ceetTranslate="ceetApp.course.courseNumber">Course Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="courseNumber"
+            id="field_courseNumber"
+            data-cy="courseNumber"
+            formControlName="courseNumber"
+          />
+          @if (courseNumberRef.invalid && (courseNumberRef.dirty || courseNumberRef.touched)) {
+            <div>
+              @if (editForm.get('courseNumber')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('courseNumber')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo no puede superar más de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let startDateRef = editForm.get('startDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" ceetTranslate="ceetApp.course.startDate">Start Date</label>
+          <div class="input-group">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="text"
+              class="form-control"
+              name="startDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              formControlName="startDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (startDateRef.invalid && (startDateRef.dirty || startDateRef.touched)) {
+            <div>
+              @if (editForm.get('startDate')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let endDateRef = editForm.get('endDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" ceetTranslate="ceetApp.course.endDate">End Date</label>
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              formControlName="endDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (endDateRef.invalid && (endDateRef.dirty || endDateRef.touched)) {
+            <div>
+              @if (editForm.get('endDate')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let routeRef = editForm.get('route')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_route" ceetTranslate="ceetApp.course.route">Route</label>
+          <input type="text" class="form-control" name="route" id="field_route" data-cy="route" formControlName="route" />
+          @if (routeRef.invalid && (routeRef.dirty || routeRef.touched)) {
+            <div>
+              @if (editForm.get('route')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('route')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseStatus" ceetTranslate="ceetApp.course.courseStatus">Course Status</label>
+          <select
+            class="form-control"
+            id="field_courseStatus"
+            data-cy="courseStatus"
+            name="courseStatus"
+            formControlName="courseStatus"
+            [compareWith]="compareCourseStatus"
+          >
+            @if (editForm.get(['courseStatus'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (courseStatusOption of courseStatusesSharedCollection(); track $index) {
+              <option [ngValue]="courseStatusOption">{{ courseStatusOption.nameCourseStatus }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['courseStatus'])!.invalid && (editForm.get(['courseStatus'])!.dirty || editForm.get(['courseStatus'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['courseStatus'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_workingDayCourse" ceetTranslate="ceetApp.course.workingDayCourse">Working Day Course</label>
+          <select
+            class="form-control"
+            id="field_workingDayCourse"
+            data-cy="workingDayCourse"
+            name="workingDayCourse"
+            formControlName="workingDayCourse"
+            [compareWith]="compareWorkingDayCourse"
+          >
+            @if (editForm.get(['workingDayCourse'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (workingDayCourseOption of workingDayCoursesSharedCollection(); track $index) {
+              <option [ngValue]="workingDayCourseOption">{{ workingDayCourseOption.workingDayName }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['workingDayCourse'])!.invalid &&
+          (editForm.get(['workingDayCourse'])!.dirty || editForm.get(['workingDayCourse'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['workingDayCourse'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_trainingProgram" ceetTranslate="ceetApp.course.trainingProgram">Training Program</label>
+          <select
+            class="form-control"
+            id="field_trainingProgram"
+            data-cy="trainingProgram"
+            name="trainingProgram"
+            formControlName="trainingProgram"
+            [compareWith]="compareTrainingProgram"
+          >
+            @if (editForm.get(['trainingProgram'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (trainingProgramOption of trainingProgramsSharedCollection(); track $index) {
+              <option [ngValue]="trainingProgramOption">{{ trainingProgramOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['trainingProgram'])!.invalid &&
+          (editForm.get(['trainingProgram'])!.dirty || editForm.get(['trainingProgram'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['trainingProgram'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

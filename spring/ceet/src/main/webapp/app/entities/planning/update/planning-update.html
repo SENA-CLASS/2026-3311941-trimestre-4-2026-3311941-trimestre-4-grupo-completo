@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ceet-planning-heading" data-cy="PlanningCreateUpdateHeading" ceetTranslate="ceetApp.planning.home.createOrEditLabel">
+        Crear o editar Planning
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let planningCodeRef = editForm.get('planningCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_planningCode" ceetTranslate="ceetApp.planning.planningCode">Planning Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="planningCode"
+            id="field_planningCode"
+            data-cy="planningCode"
+            formControlName="planningCode"
+          />
+          @if (planningCodeRef.invalid && (planningCodeRef.dirty || planningCodeRef.touched)) {
+            <div>
+              @if (editForm.get('planningCode')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('planningCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let planningDateRef = editForm.get('planningDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_planningDate" ceetTranslate="ceetApp.planning.planningDate">Planning Date</label>
+          <div class="d-flex">
+            <input
+              id="field_planningDate"
+              data-cy="planningDate"
+              type="datetime-local"
+              class="form-control"
+              name="planningDate"
+              formControlName="planningDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (planningDateRef.invalid && (planningDateRef.dirty || planningDateRef.touched)) {
+            <div>
+              @if (editForm.get('planningDate')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('planningDate')?.errors?.datetimelocal"
+                ceetTranslate="entity.validation.datetimelocal"
+                >Este campo debe ser una fecha y hora.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let planningStateRef = editForm.get('planningState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_planningState" ceetTranslate="ceetApp.planning.planningState">Planning State</label>
+          <select
+            class="form-control"
+            name="planningState"
+            formControlName="planningState"
+            id="field_planningState"
+            data-cy="planningState"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (planningStateRef.invalid && (planningStateRef.dirty || planningStateRef.touched)) {
+            <div>
+              @if (editForm.get('planningState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

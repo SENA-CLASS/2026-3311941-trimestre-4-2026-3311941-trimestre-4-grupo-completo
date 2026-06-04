@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (itemList(); as itemListRef) {
+      <div>
+        <h2 data-cy="itemListDetailsHeading"><span ceetTranslate="ceetApp.itemList.detail.title">Item List</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ itemListRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.itemList.itemNumber">Item Number</span></dt>
+          <dd>
+            <span>{{ itemListRef.itemNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.itemList.question">Question</span></dt>
+          <dd>
+            <span>{{ itemListRef.question }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.itemList.checkList">Check List</span></dt>
+          <dd>
+            @if (itemList()!.checkList) {
+              <div>
+                <a [routerLink]="['/check-list', itemList()!.checkList?.id, 'view']">{{ itemListRef.checkList?.listName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.itemList.learningResult">Learning Result</span></dt>
+          <dd>
+            @if (itemList()!.learningResult) {
+              <div>
+                <a [routerLink]="['/learning-result', itemList()!.learningResult?.id, 'view']">{{ itemListRef.learningResult?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/item-list', itemListRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

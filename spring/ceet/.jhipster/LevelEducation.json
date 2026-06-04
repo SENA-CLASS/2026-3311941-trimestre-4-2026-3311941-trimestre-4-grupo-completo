@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20260508005134"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "levelName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "stateLevelEducation",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "LevelEducation",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "trainingProgram",
+      "otherEntityRelationshipName": "levelEducation",
+      "relationshipName": "trainingProgram",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "trimester",
+      "otherEntityRelationshipName": "levelEducations",
+      "relationshipName": "trimester",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
