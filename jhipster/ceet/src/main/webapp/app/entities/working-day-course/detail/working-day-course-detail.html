@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (workingDayCourse(); as workingDayCourseRef) {
+      <div>
+        <h2 data-cy="workingDayCourseDetailsHeading">
+          <span ceetTranslate="ceetApp.workingDayCourse.detail.title">Working Day Course</span>
+        </h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ workingDayCourseRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDayCourse.workingDayAcronym">Working Day Acronym</span></dt>
+          <dd>
+            <span>{{ workingDayCourseRef.workingDayAcronym }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDayCourse.workingDayName">Working Day Name</span></dt>
+          <dd>
+            <span>{{ workingDayCourseRef.workingDayName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDayCourse.description">Description</span></dt>
+          <dd>
+            <span>{{ workingDayCourseRef.description }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDayCourse.imageUrl">Image Url</span></dt>
+          <dd>
+            <span>{{ workingDayCourseRef.imageUrl }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDayCourse.stateWorkingDay">State Working Day</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (workingDayCourseRef.stateWorkingDay ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[workingDayCourseRef.stateWorkingDay ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/working-day-course', workingDayCourseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

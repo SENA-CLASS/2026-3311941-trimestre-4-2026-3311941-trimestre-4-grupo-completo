@@ -1,0 +1,123 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-quarter-schedule-heading"
+        data-cy="QuarterScheduleCreateUpdateHeading"
+        ceetTranslate="ceetApp.quarterSchedule.home.createOrEditLabel"
+      >
+        Crear o editar Quarter Schedule
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_learningResult" ceetTranslate="ceetApp.quarterSchedule.learningResult"
+            >Learning Result</label
+          >
+          <select
+            class="form-control"
+            id="field_learningResult"
+            data-cy="learningResult"
+            name="learningResult"
+            formControlName="learningResult"
+            [compareWith]="compareLearningResult"
+          >
+            @if (editForm.get(['learningResult'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (learningResultOption of learningResultsSharedCollection(); track $index) {
+              <option [ngValue]="learningResultOption">{{ learningResultOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['learningResult'])!.invalid &&
+          (editForm.get(['learningResult'])!.dirty || editForm.get(['learningResult'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['learningResult'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_planning" ceetTranslate="ceetApp.quarterSchedule.planning">Planning</label>
+          <select
+            class="form-control"
+            id="field_planning"
+            data-cy="planning"
+            name="planning"
+            formControlName="planning"
+            [compareWith]="comparePlanning"
+          >
+            @if (editForm.get(['planning'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (planningOption of planningsSharedCollection(); track $index) {
+              <option [ngValue]="planningOption">{{ planningOption.planningCode }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['planning'])!.invalid && (editForm.get(['planning'])!.dirty || editForm.get(['planning'])!.touched)) {
+          <div>
+            @if (editForm.get(['planning'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_trimester" ceetTranslate="ceetApp.quarterSchedule.trimester">Trimester</label>
+          <select
+            class="form-control"
+            id="field_trimester"
+            data-cy="trimester"
+            name="trimester"
+            formControlName="trimester"
+            [compareWith]="compareTrimester"
+          >
+            @if (editForm.get(['trimester'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (trimesterOption of trimestersSharedCollection(); track $index) {
+              <option [ngValue]="trimesterOption">{{ trimesterOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['trimester'])!.invalid && (editForm.get(['trimester'])!.dirty || editForm.get(['trimester'])!.touched)) {
+          <div>
+            @if (editForm.get(['trimester'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

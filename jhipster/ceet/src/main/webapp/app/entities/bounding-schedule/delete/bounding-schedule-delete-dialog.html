@@ -1,0 +1,30 @@
+@if (boundingSchedule) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(boundingSchedule.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="boundingScheduleDeleteDialogHeading" ceetTranslate="entity.delete.title">
+        Confirmar operación de borrado
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <ceet-alert-error />
+      <p
+        id="ceet-delete-boundingSchedule-heading"
+        ceetTranslate="ceetApp.boundingSchedule.delete.question"
+        [translateValues]="{ id: boundingSchedule.id }"
+      >
+        ¿Seguro que quiere eliminar Bounding Schedule {{ boundingSchedule.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="ceet-confirm-delete-boundingSchedule" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span ceetTranslate="entity.action.delete">Eliminar</span>
+      </button>
+    </div>
+  </form>
+}

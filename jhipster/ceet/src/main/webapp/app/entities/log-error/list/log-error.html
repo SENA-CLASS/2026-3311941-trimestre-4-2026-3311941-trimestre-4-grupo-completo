@@ -1,0 +1,140 @@
+<div>
+  <h2 id="page-heading" data-cy="LogErrorHeading">
+    <span ceetTranslate="ceetApp.logError.home.title">Log Errors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.logError.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-log-error"
+        [routerLink]="['/log-error/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.logError.home.createLabel">Crear nuevo Log Error</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (logErrors().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.logError.home.notFound">Ningún Log Errors encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="levelError">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.logError.levelError">Level Error</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="logName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.logError.logName">Log Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="messageError">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.logError.messageError">Message Error</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="dateError">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.logError.dateError">Date Error</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="customer.id">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.logError.customer">Customer</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (logError of logErrors(); track trackId(logError)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/log-error', logError.id, 'view']">{{ logError.id }}</a>
+              </td>
+              <td>{{ logError.levelError }}</td>
+              <td>{{ logError.logName }}</td>
+              <td>{{ logError.messageError }}</td>
+              <td>{{ logError.dateError | formatMediumDatetime }}</td>
+              <td>
+                @if (logError.customer) {
+                  <div>
+                    <a [routerLink]="['/customer', logError.customer.id, 'view']">{{ logError.customer.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/log-error', logError.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/log-error', logError.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(logError)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (logErrors().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

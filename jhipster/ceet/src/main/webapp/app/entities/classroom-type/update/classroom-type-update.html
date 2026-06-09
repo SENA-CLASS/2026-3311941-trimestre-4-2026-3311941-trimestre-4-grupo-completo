@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-classroom-type-heading"
+        data-cy="ClassroomTypeCreateUpdateHeading"
+        ceetTranslate="ceetApp.classroomType.home.createOrEditLabel"
+      >
+        Crear o editar Classroom Type
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let typeClassroomRef = editForm.get('typeClassroom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_typeClassroom" ceetTranslate="ceetApp.classroomType.typeClassroom">Type Classroom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="typeClassroom"
+            id="field_typeClassroom"
+            data-cy="typeClassroom"
+            formControlName="typeClassroom"
+          />
+          @if (typeClassroomRef.invalid && (typeClassroomRef.dirty || typeClassroomRef.touched)) {
+            <div>
+              @if (editForm.get('typeClassroom')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('typeClassroom')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Este campo no puede superar más de 50 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let classroomDescriptionRef = editForm.get('classroomDescription')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_classroomDescription" ceetTranslate="ceetApp.classroomType.classroomDescription"
+            >Classroom Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="classroomDescription"
+            id="field_classroomDescription"
+            data-cy="classroomDescription"
+            formControlName="classroomDescription"
+          />
+          @if (classroomDescriptionRef.invalid && (classroomDescriptionRef.dirty || classroomDescriptionRef.touched)) {
+            <div>
+              @if (editForm.get('classroomDescription')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('classroomDescription')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo no puede superar más de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let classroomStateRef = editForm.get('classroomState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_classroomState" ceetTranslate="ceetApp.classroomType.classroomState">Classroom State</label>
+          <select
+            class="form-control"
+            name="classroomState"
+            formControlName="classroomState"
+            id="field_classroomState"
+            data-cy="classroomState"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (classroomStateRef.invalid && (classroomStateRef.dirty || classroomStateRef.touched)) {
+            <div>
+              @if (editForm.get('classroomState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

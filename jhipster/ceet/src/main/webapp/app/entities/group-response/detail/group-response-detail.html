@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (groupResponse(); as groupResponseRef) {
+      <div>
+        <h2 data-cy="groupResponseDetailsHeading"><span ceetTranslate="ceetApp.groupResponse.detail.title">Group Response</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ groupResponseRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.groupResponse.evaluationDate">Evaluation Date</span></dt>
+          <dd>
+            <span>{{ groupResponseRef.evaluationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.groupResponse.projectGroup">Project Group</span></dt>
+          <dd>
+            @if (groupResponse()!.projectGroup) {
+              <div>
+                <a [routerLink]="['/project-group', groupResponse()!.projectGroup?.id, 'view']">{{ groupResponseRef.projectGroup?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.groupResponse.assessment">Assessment</span></dt>
+          <dd>
+            @if (groupResponse()!.assessment) {
+              <div>
+                <a [routerLink]="['/assessment', groupResponse()!.assessment?.id, 'view']">{{
+                  groupResponseRef.assessment?.assessmentType
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.groupResponse.itemList">Item List</span></dt>
+          <dd>
+            @if (groupResponse()!.itemList) {
+              <div>
+                <a [routerLink]="['/item-list', groupResponse()!.itemList?.id, 'view']">{{ groupResponseRef.itemList?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/group-response', groupResponseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

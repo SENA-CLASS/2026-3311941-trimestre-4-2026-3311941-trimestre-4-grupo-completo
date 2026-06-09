@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentType(); as documentTypeRef) {
+      <div>
+        <h2 data-cy="documentTypeDetailsHeading"><span ceetTranslate="ceetApp.documentType.detail.title">Document Type</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentTypeRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.documentType.initials">Initials</span></dt>
+          <dd>
+            <span>{{ documentTypeRef.initials }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.documentType.documentName">Document Name</span></dt>
+          <dd>
+            <span>{{ documentTypeRef.documentName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.documentType.stateDocumentType">State Document Type</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (documentTypeRef.stateDocumentType ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[documentTypeRef.stateDocumentType ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-type', documentTypeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

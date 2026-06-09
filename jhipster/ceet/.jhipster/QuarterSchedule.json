@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20260609235048"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "QuarterSchedule",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "planningActivity",
+      "otherEntityRelationshipName": "quarterSchedule",
+      "relationshipName": "planningActivity",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "learningResult",
+      "relationshipName": "learningResult",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "planningCode",
+      "otherEntityName": "planning",
+      "relationshipName": "planning",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "trimester",
+      "relationshipName": "trimester",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

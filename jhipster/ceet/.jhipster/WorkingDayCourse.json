@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20260609234448"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "workingDayAcronym",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "workingDayName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "imageUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "stateWorkingDay",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "WorkingDayCourse",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "workingDayCourse",
+      "relationshipName": "course",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "trimester",
+      "otherEntityRelationshipName": "workingDayCourse",
+      "relationshipName": "trimester",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

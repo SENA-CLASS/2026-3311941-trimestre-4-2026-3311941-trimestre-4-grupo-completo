@@ -1,0 +1,163 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-current-quarter-heading"
+        data-cy="CurrentQuarterCreateUpdateHeading"
+        ceetTranslate="ceetApp.currentQuarter.home.createOrEditLabel"
+      >
+        Crear o editar Current Quarter
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let scheduledQuarterRef = editForm.get('scheduledQuarter')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_scheduledQuarter" ceetTranslate="ceetApp.currentQuarter.scheduledQuarter"
+            >Scheduled Quarter</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="scheduledQuarter"
+            id="field_scheduledQuarter"
+            data-cy="scheduledQuarter"
+            formControlName="scheduledQuarter"
+          />
+          @if (scheduledQuarterRef.invalid && (scheduledQuarterRef.dirty || scheduledQuarterRef.touched)) {
+            <div>
+              @if (editForm.get('scheduledQuarter')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('scheduledQuarter')?.errors?.number"
+                ceetTranslate="entity.validation.number"
+                >Este campo debe ser un número.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let startQuarterRef = editForm.get('startQuarter')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startQuarter" ceetTranslate="ceetApp.currentQuarter.startQuarter">Start Quarter</label>
+          <div class="input-group">
+            <input
+              id="field_startQuarter"
+              data-cy="startQuarter"
+              type="text"
+              class="form-control"
+              name="startQuarter"
+              ngbDatepicker
+              #startQuarterDp="ngbDatepicker"
+              formControlName="startQuarter"
+            />
+            <button type="button" class="btn btn-secondary" (click)="startQuarterDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (startQuarterRef.invalid && (startQuarterRef.dirty || startQuarterRef.touched)) {
+            <div>
+              @if (editForm.get('startQuarter')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let endQuarterRef = editForm.get('endQuarter')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_endQuarter" ceetTranslate="ceetApp.currentQuarter.endQuarter">End Quarter</label>
+          <div class="input-group">
+            <input
+              id="field_endQuarter"
+              data-cy="endQuarter"
+              type="text"
+              class="form-control"
+              name="endQuarter"
+              ngbDatepicker
+              #endQuarterDp="ngbDatepicker"
+              formControlName="endQuarter"
+            />
+            <button type="button" class="btn btn-secondary" (click)="endQuarterDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (endQuarterRef.invalid && (endQuarterRef.dirty || endQuarterRef.touched)) {
+            <div>
+              @if (editForm.get('endQuarter')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let currentQuarterStateRef = editForm.get('currentQuarterState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_currentQuarterState" ceetTranslate="ceetApp.currentQuarter.currentQuarterState"
+            >Current Quarter State</label
+          >
+          <select
+            class="form-control"
+            name="currentQuarterState"
+            formControlName="currentQuarterState"
+            id="field_currentQuarterState"
+            data-cy="currentQuarterState"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (currentQuarterStateRef.invalid && (currentQuarterStateRef.dirty || currentQuarterStateRef.touched)) {
+            <div>
+              @if (editForm.get('currentQuarterState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_year" ceetTranslate="ceetApp.currentQuarter.year">Year</label>
+          <select class="form-control" id="field_year" data-cy="year" name="year" formControlName="year" [compareWith]="compareYear">
+            @if (editForm.get(['year'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (yearOption of yearsSharedCollection(); track $index) {
+              <option [ngValue]="yearOption">{{ yearOption.yearNumber }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['year'])!.invalid && (editForm.get(['year'])!.dirty || editForm.get(['year'])!.touched)) {
+          <div>
+            @if (editForm.get(['year'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

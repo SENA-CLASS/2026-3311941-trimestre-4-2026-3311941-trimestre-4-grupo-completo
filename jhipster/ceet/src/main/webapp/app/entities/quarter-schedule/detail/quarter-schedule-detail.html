@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (quarterSchedule(); as quarterScheduleRef) {
+      <div>
+        <h2 data-cy="quarterScheduleDetailsHeading"><span ceetTranslate="ceetApp.quarterSchedule.detail.title">Quarter Schedule</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ quarterScheduleRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.quarterSchedule.learningResult">Learning Result</span></dt>
+          <dd>
+            @if (quarterSchedule()!.learningResult) {
+              <div>
+                <a [routerLink]="['/learning-result', quarterSchedule()!.learningResult?.id, 'view']">{{
+                  quarterScheduleRef.learningResult?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.quarterSchedule.planning">Planning</span></dt>
+          <dd>
+            @if (quarterSchedule()!.planning) {
+              <div>
+                <a [routerLink]="['/planning', quarterSchedule()!.planning?.id, 'view']">{{ quarterScheduleRef.planning?.planningCode }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.quarterSchedule.trimester">Trimester</span></dt>
+          <dd>
+            @if (quarterSchedule()!.trimester) {
+              <div>
+                <a [routerLink]="['/trimester', quarterSchedule()!.trimester?.id, 'view']">{{ quarterScheduleRef.trimester?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/quarter-schedule', quarterScheduleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

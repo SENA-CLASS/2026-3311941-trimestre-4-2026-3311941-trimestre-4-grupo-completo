@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-training-program-heading"
+        data-cy="TrainingProgramCreateUpdateHeading"
+        ceetTranslate="ceetApp.trainingProgram.home.createOrEditLabel"
+      >
+        Crear o editar Training Program
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let programCodeRef = editForm.get('programCode')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_programCode" ceetTranslate="ceetApp.trainingProgram.programCode">Program Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="programCode"
+            id="field_programCode"
+            data-cy="programCode"
+            formControlName="programCode"
+          />
+          @if (programCodeRef.invalid && (programCodeRef.dirty || programCodeRef.touched)) {
+            <div>
+              @if (editForm.get('programCode')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('programCode')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Este campo no puede superar más de 50 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let programVersionRef = editForm.get('programVersion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_programVersion" ceetTranslate="ceetApp.trainingProgram.programVersion"
+            >Program Version</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="programVersion"
+            id="field_programVersion"
+            data-cy="programVersion"
+            formControlName="programVersion"
+          />
+          @if (programVersionRef.invalid && (programVersionRef.dirty || programVersionRef.touched)) {
+            <div>
+              @if (editForm.get('programVersion')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('programVersion')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let programNameRef = editForm.get('programName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_programName" ceetTranslate="ceetApp.trainingProgram.programName">Program Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="programName"
+            id="field_programName"
+            data-cy="programName"
+            formControlName="programName"
+          />
+          @if (programNameRef.invalid && (programNameRef.dirty || programNameRef.touched)) {
+            <div>
+              @if (editForm.get('programName')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('programName')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >Este campo no puede superar más de 500 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let programInitialsRef = editForm.get('programInitials')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_programInitials" ceetTranslate="ceetApp.trainingProgram.programInitials"
+            >Program Initials</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="programInitials"
+            id="field_programInitials"
+            data-cy="programInitials"
+            formControlName="programInitials"
+          />
+          @if (programInitialsRef.invalid && (programInitialsRef.dirty || programInitialsRef.touched)) {
+            <div>
+              @if (editForm.get('programInitials')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('programInitials')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let programStateRef = editForm.get('programState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_programState" ceetTranslate="ceetApp.trainingProgram.programState">Program State</label>
+          <select class="form-control" name="programState" formControlName="programState" id="field_programState" data-cy="programState">
+            <option [ngValue]="null">{{ 'ceetApp.StateProgram.null' | translate }}</option>
+            @for (stateProgram of stateProgramValues; track $index) {
+              <option [value]="stateProgram">{{ 'ceetApp.StateProgram.' + stateProgram | translate }}</option>
+            }
+          </select>
+          @if (programStateRef.invalid && (programStateRef.dirty || programStateRef.touched)) {
+            <div>
+              @if (editForm.get('programState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_levelEducation" ceetTranslate="ceetApp.trainingProgram.levelEducation"
+            >Level Education</label
+          >
+          <select
+            class="form-control"
+            id="field_levelEducation"
+            data-cy="levelEducation"
+            name="levelEducation"
+            formControlName="levelEducation"
+            [compareWith]="compareLevelEducation"
+          >
+            @if (editForm.get(['levelEducation'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (levelEducationOption of levelEducationsSharedCollection(); track $index) {
+              <option [ngValue]="levelEducationOption">{{ levelEducationOption.levelName }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['levelEducation'])!.invalid &&
+          (editForm.get(['levelEducation'])!.dirty || editForm.get(['levelEducation'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['levelEducation'])?.errors?.required) {
+              <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

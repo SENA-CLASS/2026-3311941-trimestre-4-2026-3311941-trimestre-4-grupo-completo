@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260609235548"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "ViewedResult",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "courseTrimester",
+      "relationshipName": "courseTrimester",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "planningCode",
+      "otherEntityName": "planning",
+      "relationshipName": "planning",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "learningResult",
+      "relationshipName": "learningResult",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

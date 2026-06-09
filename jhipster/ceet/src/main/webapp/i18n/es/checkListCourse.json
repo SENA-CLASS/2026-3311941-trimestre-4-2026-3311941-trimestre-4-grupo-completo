@@ -1,0 +1,26 @@
+{
+  "ceetApp": {
+    "checkListCourse": {
+      "home": {
+        "title": "Check List Courses",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Check List Course",
+        "createOrEditLabel": "Crear o editar Check List Course",
+        "notFound": "Ningún Check List Courses encontrado"
+      },
+      "created": "Un nuevo Check List Course ha sido creado con el identificador {{ param }}",
+      "updated": "Un Check List Course ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Check List Course ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Check List Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Check List Course"
+      },
+      "id": "ID",
+      "checkListState": "Check List State",
+      "course": "Course",
+      "checkList": "Check List"
+    }
+  }
+}

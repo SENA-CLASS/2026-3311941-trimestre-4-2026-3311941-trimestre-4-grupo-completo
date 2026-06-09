@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ceet-modality-heading" data-cy="ModalityCreateUpdateHeading" ceetTranslate="ceetApp.modality.home.createOrEditLabel">
+        Crear o editar Modality
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let modalityNameRef = editForm.get('modalityName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modalityName" ceetTranslate="ceetApp.modality.modalityName">Modality Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="modalityName"
+            id="field_modalityName"
+            data-cy="modalityName"
+            formControlName="modalityName"
+          />
+          @if (modalityNameRef.invalid && (modalityNameRef.dirty || modalityNameRef.touched)) {
+            <div>
+              @if (editForm.get('modalityName')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('modalityName')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let modalityColorRef = editForm.get('modalityColor')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modalityColor" ceetTranslate="ceetApp.modality.modalityColor">Modality Color</label>
+          <input
+            type="text"
+            class="form-control"
+            name="modalityColor"
+            id="field_modalityColor"
+            data-cy="modalityColor"
+            formControlName="modalityColor"
+          />
+          @if (modalityColorRef.invalid && (modalityColorRef.dirty || modalityColorRef.touched)) {
+            <div>
+              @if (editForm.get('modalityColor')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('modalityColor')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Este campo no puede superar más de 50 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let modalityStateRef = editForm.get('modalityState')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modalityState" ceetTranslate="ceetApp.modality.modalityState">Modality State</label>
+          <select
+            class="form-control"
+            name="modalityState"
+            formControlName="modalityState"
+            id="field_modalityState"
+            data-cy="modalityState"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (modalityStateRef.invalid && (modalityStateRef.dirty || modalityStateRef.touched)) {
+            <div>
+              @if (editForm.get('modalityState')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

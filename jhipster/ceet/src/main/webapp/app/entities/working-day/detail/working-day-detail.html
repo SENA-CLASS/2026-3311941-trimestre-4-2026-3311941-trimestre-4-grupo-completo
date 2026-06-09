@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (workingDay(); as workingDayRef) {
+      <div>
+        <h2 data-cy="workingDayDetailsHeading"><span ceetTranslate="ceetApp.workingDay.detail.title">Working Day</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ workingDayRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDay.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ workingDayRef.startTime | duration }} ({{ workingDayRef.startTime }})</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDay.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ workingDayRef.endTime | duration }} ({{ workingDayRef.endTime }})</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDay.instructorWorkingDay">Instructor Working Day</span></dt>
+          <dd>
+            @if (workingDay()!.instructorWorkingDay) {
+              <div>
+                <a [routerLink]="['/instructor-working-day', workingDay()!.instructorWorkingDay?.id, 'view']">{{
+                  workingDayRef.instructorWorkingDay?.nameWorkingDay
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.workingDay.day">Day</span></dt>
+          <dd>
+            @if (workingDay()!.day) {
+              <div>
+                <a [routerLink]="['/day', workingDay()!.day?.id, 'view']">{{ workingDayRef.day?.dayName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/working-day', workingDayRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

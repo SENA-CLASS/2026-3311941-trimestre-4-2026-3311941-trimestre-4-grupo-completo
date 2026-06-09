@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20260610002248"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "areaName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "urlLogo",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "areaState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Area",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "areaInstructor",
+      "otherEntityRelationshipName": "area",
+      "relationshipName": "areaInstructor",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

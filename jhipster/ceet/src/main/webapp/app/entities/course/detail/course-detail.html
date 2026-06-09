@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (course(); as courseRef) {
+      <div>
+        <h2 data-cy="courseDetailsHeading"><span ceetTranslate="ceetApp.course.detail.title">Course</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ courseRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.courseNumber">Course Number</span></dt>
+          <dd>
+            <span>{{ courseRef.courseNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ courseRef.startDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ courseRef.endDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.route">Route</span></dt>
+          <dd>
+            <span>{{ courseRef.route }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.courseStatus">Course Status</span></dt>
+          <dd>
+            @if (course()!.courseStatus) {
+              <div>
+                <a [routerLink]="['/course-status', course()!.courseStatus?.id, 'view']">{{ courseRef.courseStatus?.nameCourseStatus }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.workingDayCourse">Working Day Course</span></dt>
+          <dd>
+            @if (course()!.workingDayCourse) {
+              <div>
+                <a [routerLink]="['/working-day-course', course()!.workingDayCourse?.id, 'view']">{{
+                  courseRef.workingDayCourse?.workingDayName
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.course.trainingProgram">Training Program</span></dt>
+          <dd>
+            @if (course()!.trainingProgram) {
+              <div>
+                <a [routerLink]="['/training-program', course()!.trainingProgram?.id, 'view']">{{ courseRef.trainingProgram?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/course', courseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

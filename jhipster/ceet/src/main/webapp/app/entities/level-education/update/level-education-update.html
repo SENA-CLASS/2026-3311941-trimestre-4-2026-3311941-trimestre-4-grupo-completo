@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="ceet-level-education-heading"
+        data-cy="LevelEducationCreateUpdateHeading"
+        ceetTranslate="ceetApp.levelEducation.home.createOrEditLabel"
+      >
+        Crear o editar Level Education
+      </h2>
+
+      <div>
+        <ceet-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" ceetTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let levelNameRef = editForm.get('levelName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_levelName" ceetTranslate="ceetApp.levelEducation.levelName">Level Name</label>
+          <input type="text" class="form-control" name="levelName" id="field_levelName" data-cy="levelName" formControlName="levelName" />
+          @if (levelNameRef.invalid && (levelNameRef.dirty || levelNameRef.touched)) {
+            <div>
+              @if (editForm.get('levelName')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+              @if (editForm.get('levelName')?.errors?.maxlength) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.maxlength" [translateValues]="{ max: '40' }"
+                  >Este campo no puede superar más de 40 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let stateLevelEducationRef = editForm.get('stateLevelEducation')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_stateLevelEducation" ceetTranslate="ceetApp.levelEducation.stateLevelEducation"
+            >State Level Education</label
+          >
+          <select
+            class="form-control"
+            name="stateLevelEducation"
+            formControlName="stateLevelEducation"
+            id="field_stateLevelEducation"
+            data-cy="stateLevelEducation"
+          >
+            <option [ngValue]="null">{{ 'ceetApp.State.null' | translate }}</option>
+            @for (state of stateValues; track $index) {
+              <option [value]="state">{{ 'ceetApp.State.' + state | translate }}</option>
+            }
+          </select>
+          @if (stateLevelEducationRef.invalid && (stateLevelEducationRef.dirty || stateLevelEducationRef.touched)) {
+            <div>
+              @if (editForm.get('stateLevelEducation')?.errors?.required) {
+                <small class="form-text text-danger" ceetTranslate="entity.validation.required">Este campo es obligatorio.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span ceetTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

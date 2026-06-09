@@ -1,0 +1,29 @@
+{
+  "ceetApp": {
+    "observationResponse": {
+      "home": {
+        "title": "Observation Responses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Observation Response",
+        "createOrEditLabel": "Create or edit a Observation Response",
+        "notFound": "No Observation Responses found"
+      },
+      "created": "A new Observation Response is created with identifier {{ param }}",
+      "updated": "A Observation Response is updated with identifier {{ param }}",
+      "deleted": "A Observation Response is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Observation Response {{ id }}?"
+      },
+      "detail": {
+        "title": "Observation Response"
+      },
+      "id": "ID",
+      "numberObservation": "Number Observation",
+      "obsevation": "Obsevation",
+      "juries": "Juries",
+      "dateObservation": "Date Observation",
+      "groupResponse": "Group Response",
+      "customer": "Customer"
+    }
+  }
+}

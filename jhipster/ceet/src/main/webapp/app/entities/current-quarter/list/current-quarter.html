@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="CurrentQuarterHeading">
+    <span ceetTranslate="ceetApp.currentQuarter.home.title">Current Quarters</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.currentQuarter.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-current-quarter"
+        [routerLink]="['/current-quarter/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.currentQuarter.home.createLabel">Crear nuevo Current Quarter</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (currentQuarters().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.currentQuarter.home.notFound">Ningún Current Quarters encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="scheduledQuarter">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.currentQuarter.scheduledQuarter">Scheduled Quarter</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="startQuarter">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.currentQuarter.startQuarter">Start Quarter</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="endQuarter">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.currentQuarter.endQuarter">End Quarter</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="currentQuarterState">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.currentQuarter.currentQuarterState">Current Quarter State</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="year.yearNumber">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.currentQuarter.year">Year</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (currentQuarter of currentQuarters(); track trackId(currentQuarter)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/current-quarter', currentQuarter.id, 'view']">{{ currentQuarter.id }}</a>
+              </td>
+              <td>{{ currentQuarter.scheduledQuarter }}</td>
+              <td>{{ currentQuarter.startQuarter | formatMediumDate }}</td>
+              <td>{{ currentQuarter.endQuarter | formatMediumDate }}</td>
+              <td [ceetTranslate]="'ceetApp.State.' + (currentQuarter.currentQuarterState ?? 'null')">
+                {{ { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[currentQuarter.currentQuarterState ?? 'null'] }}
+              </td>
+              <td>
+                @if (currentQuarter.year) {
+                  <div>
+                    <a [routerLink]="['/year', currentQuarter.year.id, 'view']">{{ currentQuarter.year.yearNumber }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/current-quarter', currentQuarter.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/current-quarter', currentQuarter.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(currentQuarter)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (currentQuarters().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

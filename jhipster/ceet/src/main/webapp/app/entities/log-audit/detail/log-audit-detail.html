@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (logAudit(); as logAuditRef) {
+      <div>
+        <h2 data-cy="logAuditDetailsHeading"><span ceetTranslate="ceetApp.logAudit.detail.title">Log Audit</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ logAuditRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.logAudit.levelAudit">Level Audit</span></dt>
+          <dd>
+            <span>{{ logAuditRef.levelAudit }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.logAudit.logName">Log Name</span></dt>
+          <dd>
+            <span>{{ logAuditRef.logName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.logAudit.messageAudit">Message Audit</span></dt>
+          <dd>
+            <span>{{ logAuditRef.messageAudit }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.logAudit.dateAudit">Date Audit</span></dt>
+          <dd>
+            <span>{{ logAuditRef.dateAudit | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.logAudit.customer">Customer</span></dt>
+          <dd>
+            @if (logAudit()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', logAudit()!.customer?.id, 'view']">{{ logAuditRef.customer?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/log-audit', logAuditRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

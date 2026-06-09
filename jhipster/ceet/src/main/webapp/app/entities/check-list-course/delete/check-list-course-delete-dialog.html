@@ -1,0 +1,30 @@
+@if (checkListCourse) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(checkListCourse.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="checkListCourseDeleteDialogHeading" ceetTranslate="entity.delete.title">
+        Confirmar operación de borrado
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <ceet-alert-error />
+      <p
+        id="ceet-delete-checkListCourse-heading"
+        ceetTranslate="ceetApp.checkListCourse.delete.question"
+        [translateValues]="{ id: checkListCourse.id }"
+      >
+        ¿Seguro que quiere eliminar Check List Course {{ checkListCourse.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="ceet-confirm-delete-checkListCourse" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span ceetTranslate="entity.action.delete">Eliminar</span>
+      </button>
+    </div>
+  </form>
+}

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (checkListCourse(); as checkListCourseRef) {
+      <div>
+        <h2 data-cy="checkListCourseDetailsHeading"><span ceetTranslate="ceetApp.checkListCourse.detail.title">Check List Course</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ checkListCourseRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.checkListCourse.checkListState">Check List State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (checkListCourseRef.checkListState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[checkListCourseRef.checkListState ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.checkListCourse.course">Course</span></dt>
+          <dd>
+            @if (checkListCourse()!.course) {
+              <div>
+                <a [routerLink]="['/course', checkListCourse()!.course?.id, 'view']">{{ checkListCourseRef.course?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.checkListCourse.checkList">Check List</span></dt>
+          <dd>
+            @if (checkListCourse()!.checkList) {
+              <div>
+                <a [routerLink]="['/check-list', checkListCourse()!.checkList?.id, 'view']">{{ checkListCourseRef.checkList?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/check-list-course', checkListCourseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

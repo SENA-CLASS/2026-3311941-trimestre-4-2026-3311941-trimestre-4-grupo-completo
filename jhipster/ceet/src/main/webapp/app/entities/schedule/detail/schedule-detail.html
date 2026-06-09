@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (schedule(); as scheduleRef) {
+      <div>
+        <h2 data-cy="scheduleDetailsHeading"><span ceetTranslate="ceetApp.schedule.detail.title">Schedule</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ scheduleRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ scheduleRef.startTime | duration }} ({{ scheduleRef.startTime }})</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ scheduleRef.endTime | duration }} ({{ scheduleRef.endTime }})</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.scheduleVersion">Schedule Version</span></dt>
+          <dd>
+            @if (schedule()!.scheduleVersion) {
+              <div>
+                <a [routerLink]="['/schedule-version', schedule()!.scheduleVersion?.id, 'view']">{{ scheduleRef.scheduleVersion?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.modality">Modality</span></dt>
+          <dd>
+            @if (schedule()!.modality) {
+              <div>
+                <a [routerLink]="['/modality', schedule()!.modality?.id, 'view']">{{ scheduleRef.modality?.modalityName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.day">Day</span></dt>
+          <dd>
+            @if (schedule()!.day) {
+              <div>
+                <a [routerLink]="['/day', schedule()!.day?.id, 'view']">{{ scheduleRef.day?.dayName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.courseTrimester">Course Trimester</span></dt>
+          <dd>
+            @if (schedule()!.courseTrimester) {
+              <div>
+                <a [routerLink]="['/course-trimester', schedule()!.courseTrimester?.id, 'view']">{{ scheduleRef.courseTrimester?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.classroom">Classroom</span></dt>
+          <dd>
+            @if (schedule()!.classroom) {
+              <div>
+                <a [routerLink]="['/classroom', schedule()!.classroom?.id, 'view']">{{ scheduleRef.classroom?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.schedule.instructor">Instructor</span></dt>
+          <dd>
+            @if (schedule()!.instructor) {
+              <div>
+                <a [routerLink]="['/instructor', schedule()!.instructor?.id, 'view']">{{ scheduleRef.instructor?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/schedule', scheduleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

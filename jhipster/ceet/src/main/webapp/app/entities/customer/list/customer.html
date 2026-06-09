@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="CustomerHeading">
+    <span ceetTranslate="ceetApp.customer.home.title">Customers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.customer.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-customer"
+        [routerLink]="['/customer/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.customer.home.createLabel">Crear nuevo Customer</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (customers().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.customer.home.notFound">Ningún Customers encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="documentNumber">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.documentNumber">Document Number</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="firstName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.firstName">First Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="secondName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.secondName">Second Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="fisrtLastName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.fisrtLastName">Fisrt Last Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="secondLastName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.secondLastName">Second Last Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="user.login">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.user">User</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="documentType.documentName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.customer.documentType">Document Type</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (customer of customers(); track trackId(customer)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a>
+              </td>
+              <td>{{ customer.documentNumber }}</td>
+              <td>{{ customer.firstName }}</td>
+              <td>{{ customer.secondName }}</td>
+              <td>{{ customer.fisrtLastName }}</td>
+              <td>{{ customer.secondLastName }}</td>
+              <td>
+                {{ customer.user?.login }}
+              </td>
+              <td>
+                @if (customer.documentType) {
+                  <div>
+                    <a [routerLink]="['/document-type', customer.documentType.id, 'view']">{{ customer.documentType.documentName }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/customer', customer.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a [routerLink]="['/customer', customer.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(customer)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (customers().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

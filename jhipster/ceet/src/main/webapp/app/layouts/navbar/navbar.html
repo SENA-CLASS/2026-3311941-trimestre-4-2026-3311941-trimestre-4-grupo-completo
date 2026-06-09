@@ -1,0 +1,838 @@
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+      <span class="logo-img"></span>
+      <span class="navbar-title" ceetTranslate="global.title">Ceet</span>
+      <span class="navbar-version">{{ version }}</span>
+    </a>
+    <a
+      class="navbar-toggler d-lg-none"
+      href="javascript:void(0);"
+      data-toggle="collapse"
+      data-target="#navbarResponsive"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      (click)="isNavbarCollapsed.update(isNavbarCollapsed => !isNavbarCollapsed)"
+    >
+      <fa-icon icon="bars" />
+    </a>
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed()">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="home" />
+              <span ceetTranslate="global.menu.home">Inicio</span>
+            </span>
+          </a>
+        </li>
+        @if (account() !== null) {
+          <li
+            ngbDropdown
+            class="nav-item dropdown pointer"
+            display="dynamic"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            data-cy="entity"
+          >
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+              <span>
+                <fa-icon icon="th-list" />
+                <span ceetTranslate="global.menu.entities.main">Entidades</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/document-type"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.documentType">Document Type</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/customer"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.customer">Customer</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/training-status"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.trainingStatus">Training Status</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/course-status"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.courseStatus">Course Status</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/working-day-course"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.workingDayCourse">Working Day Course</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/course"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.course">Course</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/apprentice"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.apprentice">Apprentice</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/log-error"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.logError">Log Error</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/log-audit"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.logAudit">Log Audit</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/planning"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.planning">Planning</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/quarter-schedule"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.quarterSchedule">Quarter Schedule</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/level-education"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.levelEducation">Level Education</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/training-program"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.trainingProgram">Training Program</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/trimester"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.trimester">Trimester</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/course-trimester"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.courseTrimester">Course Trimester</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/viewed-result"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.viewedResult">Viewed Result</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/course-planning"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.coursePlanning">Course Planning</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/learning-competence"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.learningCompetence">Learning Competence</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/learning-result"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.learningResult">Learning Result</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/planning-activity"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.planningActivity">Planning Activity</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/project"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.project">Project</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/project-phase"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.projectPhase">Project Phase</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/project-activity"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.projectActivity">Project Activity</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/classroom-type"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.classroomType">Classroom Type</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/campus"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.campus">Campus</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/classroom"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.classroom">Classroom</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/classroom-limitation"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.classroomLimitation">Classroom Limitation</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/day"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.day">Day</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/modality"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.modality">Modality</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/current-quarter"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.currentQuarter">Current Quarter</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/schedule-version"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.scheduleVersion">Schedule Version</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/schedule"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.schedule">Schedule</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/project-group"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.projectGroup">Project Group</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/assessment"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.assessment">Assessment</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/check-list"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.checkList">Check List</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/general-observation"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.generalObservation">General Observation</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/member-group"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.memberGroup">Member Group</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/check-list-course"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.checkListCourse">Check List Course</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/item-list"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.itemList">Item List</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/group-response"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.groupResponse">Group Response</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/observation-response"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.observationResponse">Observation Response</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/year"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.year">Year</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/area"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.area">Area</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/bonding"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.bonding">Bonding</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/instructor"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.instructor">Instructor</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/instructor-working-day"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.instructorWorkingDay">Instructor Working Day</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/area-instructor"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.areaInstructor">Area Instructor</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/bonding-instructor"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.bondingInstructor">Bonding Instructor</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/bounding-schedule"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.boundingSchedule">Bounding Schedule</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/bonding-competence"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.bondingCompetence">Bonding Competence</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/working-day"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.entities.workingDay">Working Day</span>
+                </a>
+              </li>
+              <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+            </ul>
+          </li>
+        }
+        <li
+          *ceetHasAnyAuthority="'ROLE_ADMIN'"
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          data-cy="adminMenu"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
+            <span>
+              <fa-icon icon="users-cog" />
+              <span ceetTranslate="global.menu.admin.main">Administración</span>
+            </span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/authority"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true" />
+                <span ceetTranslate="global.menu.entities.adminAuthority">Authority</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/user-management"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true" />
+                <span ceetTranslate="userManagement.home.title">User Management</span>
+              </a>
+            </li>
+            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+            <li>
+              <a class="dropdown-item" routerLink="/admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="tachometer-alt" [fixedWidth]="true" />
+                <span ceetTranslate="global.menu.admin.metrics">Métricas</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="heart" [fixedWidth]="true" />
+                <span ceetTranslate="global.menu.admin.health">Salud</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="cogs" [fixedWidth]="true" />
+                <span ceetTranslate="global.menu.admin.configuration">Configuración</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="tasks" [fixedWidth]="true" />
+                <span ceetTranslate="global.menu.admin.logs">Logs</span>
+              </a>
+            </li>
+            @if (openAPIEnabled()) {
+              <li>
+                <a class="dropdown-item" routerLink="/admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+                  <fa-icon icon="book" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.admin.apidocs">API</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </li>
+        @if (languages && languages.length > 1) {
+          <li ngbDropdown class="nav-item dropdown pointer" display="dynamic">
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
+              <span>
+                <fa-icon icon="flag" />
+                <span ceetTranslate="global.menu.language">Idioma</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
+              @for (language of languages; track $index) {
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [ceetActiveMenu]="language"
+                    href="javascript:void(0);"
+                    (click)="changeLanguage(language); collapseNavbar()"
+                    >{{ language | findLanguageFromKey }}</a
+                  >
+                </li>
+              }
+            </ul>
+          </li>
+        }
+        <li
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          data-cy="accountMenu"
+        >
+          @let accountRef = account();
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+            @if (!accountRef?.imageUrl) {
+              <span>
+                <fa-icon icon="user" />
+                <span ceetTranslate="global.menu.account.main">Cuenta</span>
+              </span>
+            } @else {
+              <span>
+                <img [src]="accountRef!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+              </span>
+            }
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+            @if (accountRef !== null) {
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/account/settings"
+                  routerLinkActive="active"
+                  (click)="collapseNavbar()"
+                  data-cy="settings"
+                >
+                  <fa-icon icon="wrench" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.account.settings">Ajustes</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/account/password"
+                  routerLinkActive="active"
+                  (click)="collapseNavbar()"
+                  data-cy="passwordItem"
+                >
+                  <fa-icon icon="lock" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.account.password">Contraseña</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
+                  <fa-icon icon="sign-out-alt" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.account.logout">Cerrar la sesión</span>
+                </a>
+              </li>
+            } @else {
+              <li>
+                <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
+                  <fa-icon icon="sign-in-alt" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.account.login">Iniciar sesión</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/account/register"
+                  routerLinkActive="active"
+                  (click)="collapseNavbar()"
+                  data-cy="register"
+                >
+                  <fa-icon icon="user-plus" [fixedWidth]="true" />
+                  <span ceetTranslate="global.menu.account.register">Crear una cuenta</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

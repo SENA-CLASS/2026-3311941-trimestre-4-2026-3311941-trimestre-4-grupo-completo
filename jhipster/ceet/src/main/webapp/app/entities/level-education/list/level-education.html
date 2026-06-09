@@ -1,0 +1,121 @@
+<div>
+  <h2 id="page-heading" data-cy="LevelEducationHeading">
+    <span ceetTranslate="ceetApp.levelEducation.home.title">Level Educations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span ceetTranslate="ceetApp.levelEducation.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-level-education"
+        [routerLink]="['/level-education/new']"
+      >
+        <fa-icon icon="plus" />
+        <span ceetTranslate="ceetApp.levelEducation.home.createLabel">Crear nuevo Level Education</span>
+      </button>
+    </div>
+  </h2>
+
+  <ceet-alert-error />
+
+  <ceet-alert />
+
+  @if (levelEducations().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span ceetTranslate="ceetApp.levelEducation.home.notFound">Ningún Level Educations encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr ceetSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" ceetSortBy="id">
+              <div class="d-flex">
+                <span ceetTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="levelName">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.levelEducation.levelName">Level Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" ceetSortBy="stateLevelEducation">
+              <div class="d-flex">
+                <span ceetTranslate="ceetApp.levelEducation.stateLevelEducation">State Level Education</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (levelEducation of levelEducations(); track trackId(levelEducation)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/level-education', levelEducation.id, 'view']">{{ levelEducation.id }}</a>
+              </td>
+              <td>{{ levelEducation.levelName }}</td>
+              <td [ceetTranslate]="'ceetApp.State.' + (levelEducation.stateLevelEducation ?? 'null')">
+                {{ { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[levelEducation.stateLevelEducation ?? 'null'] }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/level-education', levelEducation.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.view">Vista</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/level-education', levelEducation.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(levelEducation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" ceetTranslate="entity.action.delete">Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (levelEducations().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <ceet-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

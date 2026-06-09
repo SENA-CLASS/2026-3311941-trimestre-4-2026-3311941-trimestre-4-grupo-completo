@@ -1,0 +1,27 @@
+{
+  "ceetApp": {
+    "projectPhase": {
+      "home": {
+        "title": "Project Phases",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Phase",
+        "createOrEditLabel": "Create or edit a Project Phase",
+        "notFound": "No Project Phases found"
+      },
+      "created": "A new Project Phase is created with identifier {{ param }}",
+      "updated": "A Project Phase is updated with identifier {{ param }}",
+      "deleted": "A Project Phase is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Phase {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Phase"
+      },
+      "id": "ID",
+      "projectPhaseCode": "Project Phase Code",
+      "projectPhaseState": "Project Phase State",
+      "projectActivity": "Project Activity",
+      "project": "Project"
+    }
+  }
+}

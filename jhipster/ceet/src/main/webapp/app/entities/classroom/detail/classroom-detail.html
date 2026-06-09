@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (classroom(); as classroomRef) {
+      <div>
+        <h2 data-cy="classroomDetailsHeading"><span ceetTranslate="ceetApp.classroom.detail.title">Classroom</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ classroomRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.classroomNumber">Classroom Number</span></dt>
+          <dd>
+            <span>{{ classroomRef.classroomNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.classroomDescription">Classroom Description</span></dt>
+          <dd>
+            <span>{{ classroomRef.classroomDescription }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.classroomState">Classroom State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (classroomRef.classroomState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[classroomRef.classroomState ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.limitation">Limitation</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.Limitation.' + (classroomRef.limitation ?? 'null')">{{
+              { null: '', WITH_LIMITATION: 'con limitación', WITHOUT_LIMITATION: 'sin limitación' }[classroomRef.limitation ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.classroomType">Classroom Type</span></dt>
+          <dd>
+            @if (classroom()!.classroomType) {
+              <div>
+                <a [routerLink]="['/classroom-type', classroom()!.classroomType?.id, 'view']">{{
+                  classroomRef.classroomType?.typeClassroom
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span ceetTranslate="ceetApp.classroom.campus">Campus</span></dt>
+          <dd>
+            @if (classroom()!.campus) {
+              <div>
+                <a [routerLink]="['/campus', classroom()!.campus?.id, 'view']">{{ classroomRef.campus?.campusName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/classroom', classroomRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

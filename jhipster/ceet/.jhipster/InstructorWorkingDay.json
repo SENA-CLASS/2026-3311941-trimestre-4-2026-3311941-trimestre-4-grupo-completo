@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20260610002548"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nameWorkingDay",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "descriptionWorkingDay",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "workingDayState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "InstructorWorkingDay",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "boundingSchedule",
+      "otherEntityRelationshipName": "instructorWorkingDay",
+      "relationshipName": "boundingSchedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workingDay",
+      "otherEntityRelationshipName": "instructorWorkingDay",
+      "relationshipName": "workingDay",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

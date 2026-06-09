@@ -1,0 +1,27 @@
+{
+  "ceetApp": {
+    "quarterSchedule": {
+      "home": {
+        "title": "Quarter Schedules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Quarter Schedule",
+        "createOrEditLabel": "Create or edit a Quarter Schedule",
+        "notFound": "No Quarter Schedules found"
+      },
+      "created": "A new Quarter Schedule is created with identifier {{ param }}",
+      "updated": "A Quarter Schedule is updated with identifier {{ param }}",
+      "deleted": "A Quarter Schedule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Quarter Schedule {{ id }}?"
+      },
+      "detail": {
+        "title": "Quarter Schedule"
+      },
+      "id": "ID",
+      "planningActivity": "Planning Activity",
+      "learningResult": "Learning Result",
+      "planning": "Planning",
+      "trimester": "Trimester"
+    }
+  }
+}

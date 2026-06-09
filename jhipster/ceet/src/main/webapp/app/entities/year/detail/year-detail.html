@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (year(); as yearRef) {
+      <div>
+        <h2 data-cy="yearDetailsHeading"><span ceetTranslate="ceetApp.year.detail.title">Year</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ yearRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.year.yearNumber">Year Number</span></dt>
+          <dd>
+            <span>{{ yearRef.yearNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.year.yearState">Year State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (yearRef.yearState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[yearRef.yearState ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/year', yearRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@if (instructor) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(instructor.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="instructorDeleteDialogHeading" ceetTranslate="entity.delete.title">
+        Confirmar operación de borrado
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <ceet-alert-error />
+      <p id="ceet-delete-instructor-heading" ceetTranslate="ceetApp.instructor.delete.question" [translateValues]="{ id: instructor.id }">
+        ¿Seguro que quiere eliminar Instructor {{ instructor.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span ceetTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="ceet-confirm-delete-instructor" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span ceetTranslate="entity.action.delete">Eliminar</span>
+      </button>
+    </div>
+  </form>
+}

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (projectGroup(); as projectGroupRef) {
+      <div>
+        <h2 data-cy="projectGroupDetailsHeading"><span ceetTranslate="ceetApp.projectGroup.detail.title">Project Group</span></h2>
+
+        <hr />
+
+        <ceet-alert-error />
+
+        <ceet-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span ceetTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ projectGroupRef.id }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.projectGroup.groupNumber">Group Number</span></dt>
+          <dd>
+            <span>{{ projectGroupRef.groupNumber }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.projectGroup.projectName">Project Name</span></dt>
+          <dd>
+            <span>{{ projectGroupRef.projectName }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.projectGroup.projectGroupState">Project Group State</span></dt>
+          <dd>
+            <span [ceetTranslate]="'ceetApp.State.' + (projectGroupRef.projectGroupState ?? 'null')">{{
+              { null: '', ACTIVE: 'Activo', INACTIVE: 'Inactivo' }[projectGroupRef.projectGroupState ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span ceetTranslate="ceetApp.projectGroup.course">Course</span></dt>
+          <dd>
+            @if (projectGroup()!.course) {
+              <div>
+                <a [routerLink]="['/course', projectGroup()!.course?.id, 'view']">{{ projectGroupRef.course?.courseNumber }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span ceetTranslate="entity.action.back">Volver</span>
+        </button>
+
+        <button type="button" [routerLink]="['/project-group', projectGroupRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span ceetTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
