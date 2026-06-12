@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20260610012802"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "instructorState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Instructor",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "areaInstructor",
+      "otherEntityRelationshipName": "instructor",
+      "relationshipName": "areaInstructor",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "bondingInstructor",
+      "otherEntityRelationshipName": "instructor",
+      "relationshipName": "bondingInstructor",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "instructor",
+      "relationshipName": "schedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

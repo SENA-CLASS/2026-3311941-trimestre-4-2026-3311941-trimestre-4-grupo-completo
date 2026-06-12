@@ -28,7 +28,12 @@ public class InitialSetupMigration {
         userAuthority = template.save(userAuthority);
         Authority adminAuthority = createAdminAuthority();
         adminAuthority = template.save(adminAuthority);
+        Authority intructorAuthority = createInstructorAuthority();
+        intructorAuthority = template.save(intructorAuthority);
+        Authority coordinadorAuthority = createCoordinadorAuthority();
+        coordinadorAuthority = template.save(coordinadorAuthority);
         addUsers(userAuthority, adminAuthority);
+        addUsers(coordinadorAuthority, intructorAuthority);
     }
 
     @RollbackExecution
@@ -50,6 +55,16 @@ public class InitialSetupMigration {
         return userAuthority;
     }
 
+    private Authority createInstructorAuthority() {
+        Authority userAuthority = createAuthority(AuthoritiesConstants.INSTRUCTOR);
+        return userAuthority;
+    }
+
+
+    private Authority createCoordinadorAuthority() {
+        Authority userAuthority = createAuthority(AuthoritiesConstants.COORDINADOR);
+        return userAuthority;
+    }
     private void addUsers(Authority userAuthority, Authority adminAuthority) {
         User user = createUser(userAuthority);
         template.save(user);

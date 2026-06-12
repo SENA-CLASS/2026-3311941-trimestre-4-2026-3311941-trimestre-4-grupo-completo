@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20260610010902"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "classroomNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "classroomDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "classroomState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    },
+    {
+      "fieldName": "limitation",
+      "fieldType": "Limitation",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "WITH_LIMITATION (con limitación),WITHOUT_LIMITATION (sin limitación)"
+    }
+  ],
+  "name": "Classroom",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "classroomLimitation",
+      "otherEntityRelationshipName": "classroom",
+      "relationshipName": "classroomLimitation",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "classroom",
+      "relationshipName": "schedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "typeClassroom",
+      "otherEntityName": "classroomType",
+      "relationshipName": "classroomType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "campusName",
+      "otherEntityName": "campus",
+      "relationshipName": "campus",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

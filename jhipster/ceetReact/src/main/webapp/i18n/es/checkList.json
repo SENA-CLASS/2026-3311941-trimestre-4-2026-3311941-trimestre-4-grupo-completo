@@ -1,0 +1,28 @@
+{
+  "ceetApp": {
+    "checkList": {
+      "home": {
+        "title": "Check Lists",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Check List",
+        "createOrEditLabel": "Crear o editar Check List",
+        "notFound": "Ningún Check Lists encontrado"
+      },
+      "created": "Un nuevo Check List ha sido creado con el identificador {{ param }}",
+      "updated": "Un Check List ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Check List ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Check List {{ id }}?"
+      },
+      "detail": {
+        "title": "Check List"
+      },
+      "id": "ID",
+      "listName": "List Name",
+      "listState": "List State",
+      "checkListCourse": "Check List Course",
+      "itemList": "Item List",
+      "trainingProgram": "Training Program"
+    }
+  }
+}

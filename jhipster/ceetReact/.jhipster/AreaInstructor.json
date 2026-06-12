@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260610013002"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "areaInstructorState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "AreaInstructor",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "areaName",
+      "otherEntityName": "area",
+      "relationshipName": "area",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "instructor",
+      "relationshipName": "instructor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

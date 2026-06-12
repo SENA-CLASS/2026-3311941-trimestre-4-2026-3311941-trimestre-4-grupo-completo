@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20260610005302"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "planningCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "planningDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "planningState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Planning",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "coursePlanning",
+      "otherEntityRelationshipName": "planning",
+      "relationshipName": "coursePlanning",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "viewedResult",
+      "otherEntityRelationshipName": "planning",
+      "relationshipName": "viewedResult",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "quarterSchedule",
+      "otherEntityRelationshipName": "planning",
+      "relationshipName": "quarterSchedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

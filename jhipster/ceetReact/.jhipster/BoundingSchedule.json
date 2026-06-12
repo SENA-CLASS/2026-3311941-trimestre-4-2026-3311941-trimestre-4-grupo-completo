@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20260610013202"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "BoundingSchedule",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "bondingInstructor",
+      "relationshipName": "bondingInstructor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "instructorWorkingDay",
+      "relationshipName": "instructorWorkingDay",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

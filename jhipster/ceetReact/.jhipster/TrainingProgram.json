@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20260610005602"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "programCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "programVersion",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "programName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "programInitials",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "programState",
+      "fieldType": "StateProgram",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EXECUTION (Ejecución),DISCONTINUED (Suspendido)"
+    }
+  ],
+  "name": "TrainingProgram",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "trainingProgram",
+      "relationshipName": "course",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "learningCompetence",
+      "otherEntityRelationshipName": "trainingProgram",
+      "relationshipName": "learningCompetence",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "trainingProgram",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "checkList",
+      "otherEntityRelationshipName": "trainingProgram",
+      "relationshipName": "checkList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "levelName",
+      "otherEntityName": "levelEducation",
+      "relationshipName": "levelEducation",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

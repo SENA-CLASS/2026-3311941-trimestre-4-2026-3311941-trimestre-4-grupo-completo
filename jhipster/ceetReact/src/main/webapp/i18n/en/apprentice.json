@@ -1,0 +1,27 @@
+{
+  "ceetApp": {
+    "apprentice": {
+      "home": {
+        "title": "Apprentices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Apprentice",
+        "createOrEditLabel": "Create or edit a Apprentice",
+        "notFound": "No Apprentices found"
+      },
+      "created": "A new Apprentice is created with identifier {{ param }}",
+      "updated": "A Apprentice is updated with identifier {{ param }}",
+      "deleted": "A Apprentice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Apprentice {{ id }}?"
+      },
+      "detail": {
+        "title": "Apprentice"
+      },
+      "id": "ID",
+      "memberGroup": "Member Group",
+      "customer": "Customer",
+      "trainingStatus": "Training Status",
+      "course": "Course"
+    }
+  }
+}

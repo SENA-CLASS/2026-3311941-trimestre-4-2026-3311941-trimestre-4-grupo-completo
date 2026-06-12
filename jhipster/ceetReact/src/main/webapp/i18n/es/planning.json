@@ -1,0 +1,29 @@
+{
+  "ceetApp": {
+    "planning": {
+      "home": {
+        "title": "Plannings",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Planning",
+        "createOrEditLabel": "Crear o editar Planning",
+        "notFound": "Ningún Plannings encontrado"
+      },
+      "created": "Un nuevo Planning ha sido creado con el identificador {{ param }}",
+      "updated": "Un Planning ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Planning ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Planning {{ id }}?"
+      },
+      "detail": {
+        "title": "Planning"
+      },
+      "id": "ID",
+      "planningCode": "Planning Code",
+      "planningDate": "Planning Date",
+      "planningState": "Planning State",
+      "coursePlanning": "Course Planning",
+      "viewedResult": "Viewed Result",
+      "quarterSchedule": "Quarter Schedule"
+    }
+  }
+}

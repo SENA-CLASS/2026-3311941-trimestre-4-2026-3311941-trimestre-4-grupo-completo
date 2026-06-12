@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20260610012302"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "evaluationDate",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "GroupResponse",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "observationResponse",
+      "otherEntityRelationshipName": "groupResponse",
+      "relationshipName": "observationResponse",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectGroup",
+      "relationshipName": "projectGroup",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "assessmentType",
+      "otherEntityName": "assessment",
+      "relationshipName": "assessment",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "itemList",
+      "relationshipName": "itemList",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

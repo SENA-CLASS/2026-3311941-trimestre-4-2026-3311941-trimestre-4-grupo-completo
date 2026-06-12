@@ -1,0 +1,95 @@
+{
+  "annotations": {
+    "changelogDate": "20260610004902"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "courseNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "route",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    }
+  ],
+  "name": "Course",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "apprentice",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "apprentice",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "courseTrimester",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "courseTrimester",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "coursePlanning",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "coursePlanning",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectGroup",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "projectGroup",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "checkListCourse",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "checkListCourse",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nameCourseStatus",
+      "otherEntityName": "courseStatus",
+      "relationshipName": "courseStatus",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "workingDayName",
+      "otherEntityName": "workingDayCourse",
+      "relationshipName": "workingDayCourse",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "trainingProgram",
+      "relationshipName": "trainingProgram",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

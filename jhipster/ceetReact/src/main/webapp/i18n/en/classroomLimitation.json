@@ -1,0 +1,25 @@
+{
+  "ceetApp": {
+    "classroomLimitation": {
+      "home": {
+        "title": "Classroom Limitations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Classroom Limitation",
+        "createOrEditLabel": "Create or edit a Classroom Limitation",
+        "notFound": "No Classroom Limitations found"
+      },
+      "created": "A new Classroom Limitation is created with identifier {{ param }}",
+      "updated": "A Classroom Limitation is updated with identifier {{ param }}",
+      "deleted": "A Classroom Limitation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Classroom Limitation {{ id }}?"
+      },
+      "detail": {
+        "title": "Classroom Limitation"
+      },
+      "id": "ID",
+      "classroom": "Classroom",
+      "learningResult": "Learning Result"
+    }
+  }
+}

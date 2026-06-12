@@ -1,0 +1,25 @@
+{
+  "ceetApp": {
+    "planningActivity": {
+      "home": {
+        "title": "Planning Activities",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Planning Activity",
+        "createOrEditLabel": "Crear o editar Planning Activity",
+        "notFound": "Ningún Planning Activities encontrado"
+      },
+      "created": "Un nuevo Planning Activity ha sido creado con el identificador {{ param }}",
+      "updated": "Un Planning Activity ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Planning Activity ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Planning Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Planning Activity"
+      },
+      "id": "ID",
+      "quarterSchedule": "Quarter Schedule",
+      "projectActivity": "Project Activity"
+    }
+  }
+}

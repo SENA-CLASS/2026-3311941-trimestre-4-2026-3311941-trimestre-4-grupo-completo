@@ -1,0 +1,29 @@
+{
+  "ceetApp": {
+    "currentQuarter": {
+      "home": {
+        "title": "Current Quarters",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Current Quarter",
+        "createOrEditLabel": "Crear o editar Current Quarter",
+        "notFound": "Ningún Current Quarters encontrado"
+      },
+      "created": "Un nuevo Current Quarter ha sido creado con el identificador {{ param }}",
+      "updated": "Un Current Quarter ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Current Quarter ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Current Quarter {{ id }}?"
+      },
+      "detail": {
+        "title": "Current Quarter"
+      },
+      "id": "ID",
+      "scheduledQuarter": "Scheduled Quarter",
+      "startQuarter": "Start Quarter",
+      "endQuarter": "End Quarter",
+      "currentQuarterState": "Current Quarter State",
+      "scheduleVersion": "Schedule Version",
+      "year": "Year"
+    }
+  }
+}

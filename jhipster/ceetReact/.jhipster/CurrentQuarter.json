@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20260610011302"
+  },
+  "applications": ["ceet"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "scheduledQuarter",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "startQuarter",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endQuarter",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "currentQuarterState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "CurrentQuarter",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "scheduleVersion",
+      "otherEntityRelationshipName": "currentQuarter",
+      "relationshipName": "scheduleVersion",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "yearNumber",
+      "otherEntityName": "year",
+      "relationshipName": "year",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
