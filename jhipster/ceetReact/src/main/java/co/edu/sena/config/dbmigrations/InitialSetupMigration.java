@@ -109,7 +109,7 @@ public class InitialSetupMigration {
     private User createInstructor(Authority instructorAuthority, Authority userAuthority) {
         User instructorUser = new User();
         instructorUser.setLogin("instructor");
-        instructorUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
+        instructorUser.setPassword("$2a$10$X4cedXhRHbXfrt/tdXbY7uuo8as7xn27isGkPdRO1s4QWNo0vOAw2");
         instructorUser.setFirstName("instructor");
         instructorUser.setLastName("instructor");
         instructorUser.setEmail("instructor@localhost");
@@ -125,7 +125,7 @@ public class InitialSetupMigration {
     private User createCoordinador(Authority coordinadorAuthority, Authority userAuthority) {
         User coordinadorUser = new User();
         coordinadorUser.setLogin("coordinador");
-        coordinadorUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
+        coordinadorUser.setPassword("$2a$10$cJFUoVKaoCP3pXrzNz7EIePGQcHuVUWmPQOyY2e/VmBAoTlhVihJi");
         coordinadorUser.setFirstName("coordinador");
         coordinadorUser.setLastName("coordinador");
         coordinadorUser.setEmail("coordinador@localhost");
