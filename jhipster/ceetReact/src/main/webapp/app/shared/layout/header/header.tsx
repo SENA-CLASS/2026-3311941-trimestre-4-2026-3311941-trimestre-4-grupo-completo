@@ -2,7 +2,7 @@ import './header.scss';
 
 import React, { useEffect, useRef } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
-import { Storage, Translate } from 'react-jhipster';
+import { Storage } from 'react-jhipster';
 
 import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 
@@ -40,20 +40,10 @@ const Header = (props: IHeaderProps) => {
     }
   }, [loadingCount]);
 
-  const renderDevRibbon = () =>
-    !props.isInProduction && (
-      <div className="ribbon dev">
-        <a href="">
-          <Translate contentKey={`global.ribbon.${props.ribbonEnv}`} />
-        </a>
-      </div>
-    );
-
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
   return (
     <div id="app-header">
-      {renderDevRibbon()}
       <LoadingBar ref={loadingBarRef} className="loading-bar" color="#009cd8" />
       <Navbar data-cy="navbar" data-bs-theme="dark" expand="md" fixed="top" className="bg-primary" collapseOnSelect>
         <Navbar.Toggle aria-controls="header-tabs" aria-label="Menu" />
