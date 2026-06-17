@@ -8,13 +8,14 @@ import LoadingBar, { LoadingBarRef } from 'react-top-loading-bar';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
-import { AccountMenu, AdminMenu, EntitiesMenu, LocaleMenu } from '../menus';
+import { AccountMenu, AdminMenu, EntitiesMenu, LocaleMenu, InstructorMenu } from '../menus';
 
 import { Brand, Home } from './header-components';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isInstructor: boolean;
   ribbonEnv: string;
   isInProduction: boolean;
   isOpenAPIEnabled: boolean;
@@ -52,6 +53,7 @@ const Header = (props: IHeaderProps) => {
           <Nav className="ms-auto">
             <Home />
             {props.isAuthenticated && <EntitiesMenu />}
+            {props.isAuthenticated && props.isInstructor && <InstructorMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
             <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
             <AccountMenu isAuthenticated={props.isAuthenticated} />

@@ -7,4 +7,6 @@ export const AUTHENTICATION_TOKEN_KEY = 'ceet-authenticationToken';
 export enum Authority {
   ADMIN = 'ROLE_ADMIN',
   USER = 'ROLE_USER',
+  INSTRUCTOR = 'ROLE_INSTRUCTOR',
+  COORDINADOR = 'ROLE_COORDINADOR',
 }
