@@ -79,8 +79,6 @@ public class InitialSetupMigration {
         User userUser = new User();
         userUser.setLogin("user");
         userUser.setPassword("$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K");
-        userUser.setFirstName("User");
-        userUser.setLastName("User");
         userUser.setEmail("user@localhost");
         userUser.setActivated(true);
         userUser.setLangKey("es");
@@ -94,8 +92,6 @@ public class InitialSetupMigration {
         User adminUser = new User();
         adminUser.setLogin("admin");
         adminUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
-        adminUser.setFirstName("admin");
-        adminUser.setLastName("Administrator");
         adminUser.setEmail("admin@localhost");
         adminUser.setActivated(true);
         adminUser.setLangKey("es");
@@ -110,8 +106,6 @@ public class InitialSetupMigration {
         User instructorUser = new User();
         instructorUser.setLogin("instructor");
         instructorUser.setPassword("$2a$10$X4cedXhRHbXfrt/tdXbY7uuo8as7xn27isGkPdRO1s4QWNo0vOAw2");
-        instructorUser.setFirstName("instructor");
-        instructorUser.setLastName("instructor");
         instructorUser.setEmail("instructor@localhost");
         instructorUser.setActivated(true);
         instructorUser.setLangKey("es");
@@ -126,8 +120,6 @@ public class InitialSetupMigration {
         User coordinadorUser = new User();
         coordinadorUser.setLogin("coordinador");
         coordinadorUser.setPassword("$2a$10$cJFUoVKaoCP3pXrzNz7EIePGQcHuVUWmPQOyY2e/VmBAoTlhVihJi");
-        coordinadorUser.setFirstName("coordinador");
-        coordinadorUser.setLastName("coordinador");
         coordinadorUser.setEmail("coordinador@localhost");
         coordinadorUser.setActivated(true);
         coordinadorUser.setLangKey("es");

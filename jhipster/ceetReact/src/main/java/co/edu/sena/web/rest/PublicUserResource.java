@@ -22,8 +22,6 @@ public class PublicUserResource {
     private static final List<String> ALLOWED_ORDERED_PROPERTIES = List.of(
         "id",
         "login",
-        "firstName",
-        "lastName",
         "email",
         "activated",
         "langKey"

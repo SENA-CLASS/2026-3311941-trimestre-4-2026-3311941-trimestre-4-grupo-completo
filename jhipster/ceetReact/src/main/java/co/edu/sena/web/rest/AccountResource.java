@@ -113,8 +113,6 @@ public class AccountResource {
             throw new AccountResourceException("User could not be found");
         }
         userService.updateUser(
-            userDTO.getFirstName(),
-            userDTO.getLastName(),
             userDTO.getEmail(),
             userDTO.getLangKey(),
             userDTO.getImageUrl()

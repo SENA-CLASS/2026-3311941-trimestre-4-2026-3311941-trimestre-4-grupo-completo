@@ -83,8 +83,6 @@ class AccountResourceIT {
 
         AdminUserDTO user = new AdminUserDTO();
         user.setLogin(TEST_USER_LOGIN);
-        user.setFirstName("john");
-        user.setLastName("doe");
         user.setEmail("john.doe@jhipster.com");
         user.setImageUrl("http://placehold.it/50x50");
         user.setLangKey("en");
@@ -96,8 +94,6 @@ class AccountResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.login").value(TEST_USER_LOGIN))
-            .andExpect(jsonPath("$.firstName").value("john"))
-            .andExpect(jsonPath("$.lastName").value("doe"))
             .andExpect(jsonPath("$.email").value("john.doe@jhipster.com"))
             .andExpect(jsonPath("$.imageUrl").value("http://placehold.it/50x50"))
             .andExpect(jsonPath("$.langKey").value("en"))
@@ -116,8 +112,6 @@ class AccountResourceIT {
         ManagedUserVM validUser = new ManagedUserVM();
         validUser.setLogin("test-register-valid");
         validUser.setPassword("password");
-        validUser.setFirstName("Alice");
-        validUser.setLastName("Test");
         validUser.setEmail("test-register-valid@example.com");
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -138,8 +132,6 @@ class AccountResourceIT {
         ManagedUserVM invalidUser = new ManagedUserVM();
         invalidUser.setLogin("funky-log(n"); // <-- invalid
         invalidUser.setPassword("password");
-        invalidUser.setFirstName("Funky");
-        invalidUser.setLastName("One");
         invalidUser.setEmail("funky@example.com");
         invalidUser.setActivated(true);
         invalidUser.setImageUrl("http://placehold.it/50x50");
@@ -156,9 +148,9 @@ class AccountResourceIT {
 
     static Stream<ManagedUserVM> invalidUsers() {
         return Stream.of(
-            createInvalidUser("bob", "password", "Bob", "Green", "invalid", true), // <-- invalid
-            createInvalidUser("bob", "123", "Bob", "Green", "bob@example.com", true), // password with only 3 digits
-            createInvalidUser("bob", null, "Bob", "Green", "bob@example.com", true) // invalid null password
+            createInvalidUser("bob", "password",  "invalid", true), // <-- invalid
+            createInvalidUser("bob", "123", "bob@example.com", true), // password with only 3 digits
+            createInvalidUser("bob", null, "bob@example.com", true) // invalid null password
         );
     }
 
@@ -176,16 +168,12 @@ class AccountResourceIT {
     private static ManagedUserVM createInvalidUser(
         String login,
         String password,
-        String firstName,
-        String lastName,
         String email,
         boolean activated
     ) {
         ManagedUserVM invalidUser = new ManagedUserVM();
         invalidUser.setLogin(login);
         invalidUser.setPassword(password);
-        invalidUser.setFirstName(firstName);
-        invalidUser.setLastName(lastName);
         invalidUser.setEmail(email);
         invalidUser.setActivated(activated);
         invalidUser.setImageUrl("http://placehold.it/50x50");
@@ -200,8 +188,6 @@ class AccountResourceIT {
         ManagedUserVM firstUser = new ManagedUserVM();
         firstUser.setLogin("alice");
         firstUser.setPassword("password");
-        firstUser.setFirstName("Alice");
-        firstUser.setLastName("Something");
         firstUser.setEmail("alice@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -211,8 +197,6 @@ class AccountResourceIT {
         ManagedUserVM secondUser = new ManagedUserVM();
         secondUser.setLogin(firstUser.getLogin());
         secondUser.setPassword(firstUser.getPassword());
-        secondUser.setFirstName(firstUser.getFirstName());
-        secondUser.setLastName(firstUser.getLastName());
         secondUser.setEmail("alice2@example.com");
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
@@ -251,8 +235,6 @@ class AccountResourceIT {
         ManagedUserVM firstUser = new ManagedUserVM();
         firstUser.setLogin("test-register-duplicate-email");
         firstUser.setPassword("password");
-        firstUser.setFirstName("Alice");
-        firstUser.setLastName("Test");
         firstUser.setEmail("test-register-duplicate-email@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -270,8 +252,6 @@ class AccountResourceIT {
         ManagedUserVM secondUser = new ManagedUserVM();
         secondUser.setLogin("test-register-duplicate-email-2");
         secondUser.setPassword(firstUser.getPassword());
-        secondUser.setFirstName(firstUser.getFirstName());
-        secondUser.setLastName(firstUser.getLastName());
         secondUser.setEmail(firstUser.getEmail());
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
@@ -293,8 +273,6 @@ class AccountResourceIT {
         userWithUpperCaseEmail.setId(firstUser.getId());
         userWithUpperCaseEmail.setLogin("test-register-duplicate-email-3");
         userWithUpperCaseEmail.setPassword(firstUser.getPassword());
-        userWithUpperCaseEmail.setFirstName(firstUser.getFirstName());
-        userWithUpperCaseEmail.setLastName(firstUser.getLastName());
         userWithUpperCaseEmail.setEmail("TEST-register-duplicate-email@example.com");
         userWithUpperCaseEmail.setImageUrl(firstUser.getImageUrl());
         userWithUpperCaseEmail.setLangKey(firstUser.getLangKey());
@@ -325,8 +303,6 @@ class AccountResourceIT {
         ManagedUserVM validUser = new ManagedUserVM();
         validUser.setLogin("badguy");
         validUser.setPassword("password");
-        validUser.setFirstName("Bad");
-        validUser.setLastName("Guy");
         validUser.setEmail("badguy@example.com");
         validUser.setActivated(true);
         validUser.setImageUrl("http://placehold.it/50x50");
@@ -383,8 +359,6 @@ class AccountResourceIT {
 
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setLogin("not-used");
-        userDTO.setFirstName("firstname");
-        userDTO.setLastName("lastname");
         userDTO.setEmail("save-account@example.com");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
@@ -396,8 +370,6 @@ class AccountResourceIT {
             .andExpect(status().isOk());
 
         User updatedUser = userRepository.findOneByLogin(user.getLogin()).orElse(null);
-        assertThat(updatedUser.getFirstName()).isEqualTo(userDTO.getFirstName());
-        assertThat(updatedUser.getLastName()).isEqualTo(userDTO.getLastName());
         assertThat(updatedUser.getEmail()).isEqualTo(userDTO.getEmail());
         assertThat(updatedUser.getLangKey()).isEqualTo(userDTO.getLangKey());
         assertThat(updatedUser.getPassword()).isEqualTo(user.getPassword());
@@ -421,8 +393,6 @@ class AccountResourceIT {
 
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setLogin("not-used");
-        userDTO.setFirstName("firstname");
-        userDTO.setLastName("lastname");
         userDTO.setEmail("invalid email");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
@@ -458,8 +428,6 @@ class AccountResourceIT {
 
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setLogin("not-used");
-        userDTO.setFirstName("firstname");
-        userDTO.setLastName("lastname");
         userDTO.setEmail("save-existing-email2@example.com");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
@@ -489,8 +457,6 @@ class AccountResourceIT {
 
         AdminUserDTO userDTO = new AdminUserDTO();
         userDTO.setLogin("not-used");
-        userDTO.setFirstName("firstname");
-        userDTO.setLastName("lastname");
         userDTO.setEmail("save-existing-email-and-login@example.com");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
