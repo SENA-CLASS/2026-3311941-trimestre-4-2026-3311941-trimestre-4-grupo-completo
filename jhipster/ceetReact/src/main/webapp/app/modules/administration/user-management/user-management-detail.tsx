@@ -46,14 +46,6 @@ export const UserManagementDetail = () => {
             )}
           </dd>
           <dt>
-            <Translate contentKey="userManagement.firstName">First Name</Translate>
-          </dt>
-          <dd>{user.firstName}</dd>
-          <dt>
-            <Translate contentKey="userManagement.lastName">Last Name</Translate>
-          </dt>
-          <dd>{user.lastName}</dd>
-          <dt>
             <Translate contentKey="userManagement.email">Email</Translate>
           </dt>
           <dd>{user.email}</dd>

@@ -102,30 +102,6 @@ export const UserManagementUpdate = () => {
                   },
                 }}
               />
-              <ValidatedField
-                type="text"
-                name="firstName"
-                data-cy="firstName"
-                label={translate('userManagement.firstName')}
-                validate={{
-                  maxLength: {
-                    value: 50,
-                    message: translate('entity.validation.maxlength', { max: 50 }),
-                  },
-                }}
-              />
-              <ValidatedField
-                type="text"
-                name="lastName"
-                data-cy="lastName"
-                label={translate('userManagement.lastName')}
-                validate={{
-                  maxLength: {
-                    value: 50,
-                    message: translate('entity.validation.maxlength', { max: 50 }),
-                  },
-                }}
-              />
               <FormText>This field cannot be longer than 50 characters.</FormText>
               <ValidatedField
                 name="email"
