@@ -13436,16 +13436,6 @@
                         "minLength": 1,
                         "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
                     },
-                    "firstName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
-                    },
                     "email": {
                         "type": "string",
                         "format": "email",
@@ -13502,16 +13492,6 @@
                         "maxLength": 50,
                         "minLength": 1,
                         "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
-                    },
-                    "firstName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
                     },
                     "email": {
                         "type": "string",
@@ -13631,16 +13611,6 @@
                         "maxLength": 50,
                         "minLength": 1,
                         "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
-                    },
-                    "firstName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
-                    },
-                    "lastName": {
-                        "type": "string",
-                        "maxLength": 50,
-                        "minLength": 0
                     },
                     "email": {
                         "type": "string",
