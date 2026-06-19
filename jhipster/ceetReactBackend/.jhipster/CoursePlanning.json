@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20260618235450"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "stateCoursePlanning",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "CoursePlanning",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "courseNumber",
+      "otherEntityName": "course",
+      "relationshipName": "course",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "planningCode",
+      "otherEntityName": "planning",
+      "relationshipName": "planning",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20260619001350"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "number",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "observationGeneral",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "jury",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "dateAudit",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "GeneralObservation",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "projectGroup",
+      "relationshipName": "projectGroup",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

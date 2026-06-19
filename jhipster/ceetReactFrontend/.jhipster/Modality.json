@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20260619002225"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "modalityName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "modalityColor",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "modalityState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Modality",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "modality",
+      "relationshipName": "schedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

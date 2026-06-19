@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20260619000150"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "typeClassroom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "classroomDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "classroomState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "ClassroomType",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "classroom",
+      "otherEntityRelationshipName": "classroomType",
+      "relationshipName": "classroom",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

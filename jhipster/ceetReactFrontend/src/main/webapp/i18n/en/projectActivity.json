@@ -1,0 +1,28 @@
+{
+  "ceet2App": {
+    "projectActivity": {
+      "home": {
+        "title": "Project Activities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Activity",
+        "createOrEditLabel": "Create or edit a Project Activity",
+        "notFound": "No Project Activities found"
+      },
+      "created": "A new Project Activity is created with identifier {{ param }}",
+      "updated": "A Project Activity is updated with identifier {{ param }}",
+      "deleted": "A Project Activity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Activity"
+      },
+      "id": "ID",
+      "activityNumber": "Activity Number",
+      "activityDescription": "Activity Description",
+      "projectActivityState": "Project Activity State",
+      "planningActivity": "Planning Activity",
+      "projectPhase": "Project Phase"
+    }
+  }
+}

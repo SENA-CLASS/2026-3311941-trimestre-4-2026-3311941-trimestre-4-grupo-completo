@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20260619000450"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "ClassroomLimitation",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "classroom",
+      "relationshipName": "classroom",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "learningResult",
+      "relationshipName": "learningResult",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

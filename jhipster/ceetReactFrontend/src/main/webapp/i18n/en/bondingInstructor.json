@@ -1,0 +1,30 @@
+{
+  "ceet2App": {
+    "bondingInstructor": {
+      "home": {
+        "title": "Bonding Instructors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bonding Instructor",
+        "createOrEditLabel": "Create or edit a Bonding Instructor",
+        "notFound": "No Bonding Instructors found"
+      },
+      "created": "A new Bonding Instructor is created with identifier {{ param }}",
+      "updated": "A Bonding Instructor is updated with identifier {{ param }}",
+      "deleted": "A Bonding Instructor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bonding Instructor {{ id }}?"
+      },
+      "detail": {
+        "title": "Bonding Instructor"
+      },
+      "id": "ID",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "boundingSchedule": "Bounding Schedule",
+      "bondingCompetence": "Bonding Competence",
+      "year": "Year",
+      "instructor": "Instructor",
+      "bonding": "Bonding"
+    }
+  }
+}

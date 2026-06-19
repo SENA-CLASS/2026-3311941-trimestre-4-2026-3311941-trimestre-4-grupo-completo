@@ -1,0 +1,62 @@
+{
+  "annotations": {
+    "changelogDate": "20260619002550"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "startTime",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "BondingInstructor",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "boundingSchedule",
+      "otherEntityRelationshipName": "bondingInstructor",
+      "relationshipName": "boundingSchedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "bondingCompetence",
+      "otherEntityRelationshipName": "bondingInstructor",
+      "relationshipName": "bondingCompetence",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "yearNumber",
+      "otherEntityName": "year",
+      "relationshipName": "year",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "instructor",
+      "relationshipName": "instructor",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "bondingType",
+      "otherEntityName": "bonding",
+      "relationshipName": "bonding",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

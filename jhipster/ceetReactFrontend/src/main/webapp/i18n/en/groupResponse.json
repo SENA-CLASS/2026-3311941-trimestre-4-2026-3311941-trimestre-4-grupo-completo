@@ -1,0 +1,28 @@
+{
+  "ceet2App": {
+    "groupResponse": {
+      "home": {
+        "title": "Group Responses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Group Response",
+        "createOrEditLabel": "Create or edit a Group Response",
+        "notFound": "No Group Responses found"
+      },
+      "created": "A new Group Response is created with identifier {{ param }}",
+      "updated": "A Group Response is updated with identifier {{ param }}",
+      "deleted": "A Group Response is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Group Response {{ id }}?"
+      },
+      "detail": {
+        "title": "Group Response"
+      },
+      "id": "ID",
+      "evaluationDate": "Evaluation Date",
+      "observationResponse": "Observation Response",
+      "projectGroup": "Project Group",
+      "assessment": "Assessment",
+      "itemList": "Item List"
+    }
+  }
+}

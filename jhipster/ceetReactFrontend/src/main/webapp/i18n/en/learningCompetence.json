@@ -1,0 +1,28 @@
+{
+  "ceet2App": {
+    "learningCompetence": {
+      "home": {
+        "title": "Learning Competences",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Learning Competence",
+        "createOrEditLabel": "Create or edit a Learning Competence",
+        "notFound": "No Learning Competences found"
+      },
+      "created": "A new Learning Competence is created with identifier {{ param }}",
+      "updated": "A Learning Competence is updated with identifier {{ param }}",
+      "deleted": "A Learning Competence is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Learning Competence {{ id }}?"
+      },
+      "detail": {
+        "title": "Learning Competence"
+      },
+      "id": "ID",
+      "competenceCode": "Competence Code",
+      "competitionDenomination": "Competition Denomination",
+      "learningResult": "Learning Result",
+      "bondingCompetence": "Bonding Competence",
+      "trainingProgram": "Training Program"
+    }
+  }
+}

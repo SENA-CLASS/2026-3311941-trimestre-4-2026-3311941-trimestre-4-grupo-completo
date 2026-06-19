@@ -1,0 +1,29 @@
+{
+  "ceet2App": {
+    "trimester": {
+      "home": {
+        "title": "Trimesters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Trimester",
+        "createOrEditLabel": "Create or edit a Trimester",
+        "notFound": "No Trimesters found"
+      },
+      "created": "A new Trimester is created with identifier {{ param }}",
+      "updated": "A Trimester is updated with identifier {{ param }}",
+      "deleted": "A Trimester is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Trimester {{ id }}?"
+      },
+      "detail": {
+        "title": "Trimester"
+      },
+      "id": "ID",
+      "trimesterName": "Trimester Name",
+      "trimesterState": "Trimester State",
+      "courseTrimester": "Course Trimester",
+      "quarterSchedule": "Quarter Schedule",
+      "workingDayCourse": "Working Day Course",
+      "levelEducations": "Level Educations"
+    }
+  }
+}

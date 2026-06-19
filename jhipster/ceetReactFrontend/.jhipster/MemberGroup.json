@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20260619003025"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "MemberGroup",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "projectGroup",
+      "relationshipName": "projectGroup",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "apprentice",
+      "relationshipName": "apprentice",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

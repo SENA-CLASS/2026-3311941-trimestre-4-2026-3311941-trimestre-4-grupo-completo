@@ -1,0 +1,26 @@
+{
+  "ceet2App": {
+    "areaInstructor": {
+      "home": {
+        "title": "Area Instructors",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Area Instructor",
+        "createOrEditLabel": "Crear o editar Area Instructor",
+        "notFound": "Ningún Area Instructors encontrado"
+      },
+      "created": "Un nuevo Area Instructor ha sido creado con el identificador {{ param }}",
+      "updated": "Un Area Instructor ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Area Instructor ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Area Instructor {{ id }}?"
+      },
+      "detail": {
+        "title": "Area Instructor"
+      },
+      "id": "ID",
+      "areaInstructorState": "Area Instructor State",
+      "area": "Area",
+      "instructor": "Instructor"
+    }
+  }
+}

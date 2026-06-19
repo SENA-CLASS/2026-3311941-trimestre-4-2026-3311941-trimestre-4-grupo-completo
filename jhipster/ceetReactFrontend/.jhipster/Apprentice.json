@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20260619000025"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [],
+  "name": "Apprentice",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "memberGroup",
+      "otherEntityRelationshipName": "apprentice",
+      "relationshipName": "memberGroup",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "statusName",
+      "otherEntityName": "trainingStatus",
+      "relationshipName": "trainingStatus",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "course",
+      "relationshipName": "course",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20260619001125"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "competenceCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "competitionDenomination",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    }
+  ],
+  "name": "LearningCompetence",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "learningResult",
+      "otherEntityRelationshipName": "learningCompetence",
+      "relationshipName": "learningResult",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "bondingCompetence",
+      "otherEntityRelationshipName": "learningCompetence",
+      "relationshipName": "bondingCompetence",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "trainingProgram",
+      "relationshipName": "trainingProgram",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

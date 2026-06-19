@@ -1,0 +1,27 @@
+{
+  "ceet2App": {
+    "levelEducation": {
+      "home": {
+        "title": "Level Educations",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Level Education",
+        "createOrEditLabel": "Crear o editar Level Education",
+        "notFound": "Ningún Level Educations encontrado"
+      },
+      "created": "Un nuevo Level Education ha sido creado con el identificador {{ param }}",
+      "updated": "Un Level Education ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Level Education ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Level Education {{ id }}?"
+      },
+      "detail": {
+        "title": "Level Education"
+      },
+      "id": "ID",
+      "levelName": "Level Name",
+      "stateLevelEducation": "State Level Education",
+      "trainingProgram": "Training Program",
+      "trimester": "Trimester"
+    }
+  }
+}

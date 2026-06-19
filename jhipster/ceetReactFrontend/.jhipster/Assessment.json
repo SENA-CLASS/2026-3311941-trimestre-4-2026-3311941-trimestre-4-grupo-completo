@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20260619002725"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "assessmentType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "assessmentState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Assessment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "groupResponse",
+      "otherEntityRelationshipName": "assessment",
+      "relationshipName": "groupResponse",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

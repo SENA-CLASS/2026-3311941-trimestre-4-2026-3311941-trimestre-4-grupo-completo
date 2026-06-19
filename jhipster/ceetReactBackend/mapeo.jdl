@@ -1,0 +1,391 @@
+application {
+    config {
+        baseName ceet2
+        applicationType monolith
+        packageName co.edu.sena
+        authenticationType jwt
+        databaseType mongodb
+        devDatabaseType mongodb
+        prodDatabaseType mongodb
+        cacheProvider no
+        buildTool maven
+        clientFramework angularX
+        enableTranslation true
+        nativeLanguage es
+        languages [en, es]
+        websocket false
+        testFrameworks [cucumber]
+        //entitySuffix false
+        jhiPrefix ceet
+        reactive false
+        serverPort 8080
+        searchEngine false
+        clientTheme cyborg
+        clientThemeVariant primary
+    }
+    entities *
+}
+
+enum State{
+	ACTIVE(Activo),
+    INACTIVE(Inactivo)
+}
+
+entity DocumentType {
+	initials String required maxlength(10) unique,
+    documentName String required maxlength(100) unique,
+    stateDocumentType State required
+}
+
+entity Customer{
+	documentNumber String required maxlength(50),
+    firstName String required maxlength(50),
+    secondName String maxlength(50),
+    fisrtLastName String required maxlength(50),
+    secondLastName String maxlength(50)
+}
+
+entity TrainingStatus {
+	statusName String required maxlength(40) unique,
+    stateTraining State required
+}
+
+entity CourseStatus {
+	nameCourseStatus String required maxlength(20) unique,
+    stateCourse State required
+}
+
+entity WorkingDayCourse {
+	workingDayAcronym String required maxlength(20) unique,
+    workingDayName String required maxlength(40) unique,
+    description String required maxlength(100),
+    imageUrl String maxlength(100),
+    stateWorkingDay State required
+}
+
+entity Course {
+	courseNumber String required maxlength(100) unique,
+    startDate LocalDate required,
+    endDate LocalDate required,
+    route String required maxlength(40)
+}
+
+entity Apprentice {
+}
+
+entity LogError {
+    levelError String required maxlength(400),
+    logName String required maxlength(400),
+    messageError String required maxlength(400),
+    dateError ZonedDateTime required
+}
+
+entity LogAudit {
+    levelAudit String required maxlength(400),
+    logName String required maxlength(400),
+    messageAudit String required maxlength(400),
+    dateAudit ZonedDateTime required
+}
+
+entity Planning {
+    planningCode String required maxlength(40) unique,
+    planningDate ZonedDateTime required,
+    planningState State required
+}
+
+entity QuarterSchedule {
+}
+
+entity LevelEducation {
+    levelName String required maxlength(40) unique,
+    stateLevelEducation State required
+}
+
+enum StateProgram {
+	EXECUTION ("Ejecución"),
+    DISCONTINUED ("Suspendido")
+}
+
+entity TrainingProgram {
+    programCode String required maxlength(50),
+    programVersion String required maxlength(40),
+    programName String required maxlength(500),
+    programInitials String required maxlength(40),
+    programState StateProgram required
+}
+
+entity Trimester {
+    trimesterName Integer required,
+    trimesterState String
+}
+
+entity CourseTrimester {
+}
+
+entity ViewedResult {
+
+}
+
+entity CoursePlanning {
+    stateCoursePlanning State required
+}
+
+entity LearningCompetence {
+    competenceCode String required maxlength(50),
+    competitionDenomination String required maxlength(1000)
+}
+
+entity LearningResult {
+    resultCode String required maxlength(40),
+    denomination String required maxlength(1000)
+}
+
+entity PlanningActivity {
+}
+
+entity Project {
+    projectCode String required maxlength(40) unique,
+    projectName String required maxlength(500),
+    projectState State required
+}
+
+entity ProjectPhase {
+    projectPhaseCode String required maxlength(40),
+    projectPhaseState String required maxlength(40)
+}
+
+entity ProjectActivity {
+    activityNumber Integer required,
+    activityDescription String required maxlength(400),
+    projectActivityState String required maxlength(40)
+}
+
+entity ClassroomType {
+    typeClassroom String required maxlength(50) unique,
+    classroomDescription String required maxlength(100),
+    classroomState State required
+}
+
+entity Campus {
+    campusName String required maxlength(50) unique,
+    campusAddress String required maxlength(400),
+    campusState State required
+}
+
+enum Limitation{
+	WITH_LIMITATION("con limitación"),
+    WITHOUT_LIMITATION("sin limitación")
+}
+
+entity Classroom{
+    classroomNumber String required maxlength(50),
+    classroomDescription String required maxlength(1000),
+    classroomState State required,
+    limitation Limitation required
+}
+
+entity ClassroomLimitation {
+}
+
+entity Day {
+    dayName String required maxlength(40) unique,
+    dayState State required
+}
+
+entity Modality {
+    modalityName String required maxlength(40) unique,
+    modalityColor String required maxlength(50),
+    modalityState State required
+}
+
+entity CurrentQuarter {
+    scheduledQuarter Integer required,
+    startQuarter LocalDate required,
+    endQuarter LocalDate required,
+    currentQuarterState State required
+}
+
+entity ScheduleVersion {
+    versionNumber String required maxlength(40),
+    versionState State required
+}
+
+entity Schedule {
+    startTime Duration required,
+    endTime Duration required
+}
+
+entity ProjectGroup {
+    groupNumber Integer required,
+    projectName String required maxlength(300),
+    projectGroupState State required
+}
+
+entity Assessment {
+    assessmentType String required maxlength(50) unique,
+    assessmentState State required
+}
+
+entity CheckList {
+    listName String required maxlength(50) unique,
+    listState State required
+}
+
+entity GeneralObservation {
+    number Integer required,
+    observationGeneral String required maxlength(500),
+    jury String required maxlength(500),
+    dateAudit ZonedDateTime required
+}
+
+entity MemberGroup {
+}
+
+entity CheckListCourse {
+    checkListState State required
+}
+
+entity ItemList {
+    itemNumber Integer required,
+    question String required maxlength(1000)
+}
+
+entity GroupResponse {
+    evaluationDate ZonedDateTime required
+}
+
+entity ObservationResponse {
+    numberObservation Integer required,
+    obsevation String required maxlength(400),
+    juries String required maxlength(400)
+    dateObservation ZonedDateTime required
+}
+
+entity Year {
+    yearNumber Integer required unique,
+    yearState State required
+}
+
+entity Area {
+    areaName String required maxlength(200) unique,
+    urlLogo String maxlength(1000),
+    areaState State required
+}
+
+entity Bonding {
+    bondingType String required maxlength(40) unique,
+    workingHours Integer required,
+    bondingState State required
+}
+
+entity Instructor {
+     instructorState State required
+}
+
+entity InstructorWorkingDay {
+    nameWorkingDay String required maxlength(80) unique,
+    descriptionWorkingDay String required maxlength(200),
+    workingDayState State required
+}
+
+entity AreaInstructor {
+    areaInstructorState State required
+}
+
+entity BondingInstructor{
+    startTime LocalDate required,
+    endTime LocalDate required
+}
+
+entity BoundingSchedule {
+}
+
+entity BondingCompetence {
+}
+
+entity WorkingDay {
+    startTime Duration required,
+    endTime Duration required
+}
+
+relationship OneToMany {
+	DocumentType to Customer{documentType(documentName) required}
+    CourseStatus to Course{courseStatus(nameCourseStatus) required}
+    WorkingDayCourse to Course{workingDayCourse(workingDayName) required}
+    Customer to Apprentice{customer required}
+    TrainingStatus to Apprentice{trainingStatus(statusName) required}
+    Course to Apprentice{course required}
+    Customer to LogError{customer required}
+    Customer to LogAudit{customer required}
+    LevelEducation to TrainingProgram{levelEducation(levelName) required}
+    TrainingProgram to Course{trainingProgram required}
+    WorkingDayCourse to Trimester{workingDayCourse(workingDayName) required}
+    LevelEducation to Trimester{levelEducations(levelName) required}
+    Course to CourseTrimester{course(courseNumber) required}
+    Trimester to CourseTrimester{trimester required}
+    CourseTrimester to ViewedResult{courseTrimester required}
+    Course to CoursePlanning{course(courseNumber) required}
+    Planning to CoursePlanning{planning(planningCode) required}
+    Planning to ViewedResult{planning(planningCode) required}
+    TrainingProgram to LearningCompetence{trainingProgram required}
+    LearningCompetence to LearningResult{learningCompetence required}
+    LearningResult to QuarterSchedule{learningResult required}
+    Planning to QuarterSchedule{planning(planningCode) required}
+    Trimester to QuarterSchedule{trimester required}
+    QuarterSchedule to PlanningActivity{quarterSchedule required}
+    TrainingProgram to Project{trainingProgram required}
+    Project to ProjectPhase{project(projectCode) required}
+    ProjectPhase to ProjectActivity{projectPhase required}
+    ProjectActivity to PlanningActivity{projectActivity required}
+    ClassroomType to Classroom{classroomType(typeClassroom) required}
+    Campus to Classroom{campus(campusName) required}
+    Classroom to ClassroomLimitation{classroom required}
+    LearningResult to ClassroomLimitation{learningResult required}
+    CurrentQuarter to ScheduleVersion{currentQuarter required}
+    ScheduleVersion to Schedule{scheduleVersion required}
+    Modality to Schedule{modality(modalityName) required}
+    Day to Schedule{day(dayName) required}
+    CourseTrimester to Schedule{courseTrimester required}
+    Classroom to Schedule{classroom required}
+    Course to ProjectGroup{course(courseNumber) required}
+    TrainingProgram to CheckList{trainingProgram required}
+    ProjectGroup to GeneralObservation{projectGroup required}
+    Customer to GeneralObservation{customer required}
+    ProjectGroup to MemberGroup{projectGroup required}
+    Apprentice to MemberGroup{apprentice required}
+    Course to CheckListCourse{course required}
+    CheckList to CheckListCourse{checkList required}
+    CheckList to ItemList{checkList(listName) required}
+    LearningResult to ItemList{learningResult required}
+    ProjectGroup to GroupResponse{projectGroup required}
+    Assessment to GroupResponse{assessment(assessmentType) required}
+    ItemList to GroupResponse{itemList required}
+    GroupResponse to ObservationResponse{groupResponse required}
+    Customer to ObservationResponse{customer required}
+    Customer to Instructor{customer required}
+    Area to AreaInstructor{area(areaName) required}
+    Instructor to AreaInstructor{instructor required}
+    Year to BondingInstructor{year(yearNumber) required}
+    Instructor to BondingInstructor{instructor required}
+    Bonding to BondingInstructor{bonding(bondingType) required}
+    BondingInstructor to BoundingSchedule{bondingInstructor required}
+    InstructorWorkingDay to BoundingSchedule{instructorWorkingDay required}
+    BondingInstructor to BondingCompetence{bondingInstructor required}
+    LearningCompetence to BondingCompetence{learningCompetence required}
+    InstructorWorkingDay to WorkingDay{instructorWorkingDay(nameWorkingDay) required}
+    Day to WorkingDay{day(dayName) required}
+    LearningResult to ViewedResult{learningResult required}
+    TrainingProgram to Course{trainingProgram required}
+    Instructor to Schedule{instructor required}
+    Year to CurrentQuarter{year(yearNumber) required}
+}
+
+
+relationship OneToOne {
+	Customer{user(login) required} to User with builtInEntity
+}
+
+dto * with mapstruct
+service * with serviceImpl
+paginate * with pagination
+//search * with elasticsearch

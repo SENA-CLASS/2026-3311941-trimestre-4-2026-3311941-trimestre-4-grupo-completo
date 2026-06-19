@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20260618234550"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "levelError",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "400"
+    },
+    {
+      "fieldName": "logName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "400"
+    },
+    {
+      "fieldName": "messageError",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "400"
+    },
+    {
+      "fieldName": "dateError",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "LogError",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "customer",
+      "relationshipName": "customer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

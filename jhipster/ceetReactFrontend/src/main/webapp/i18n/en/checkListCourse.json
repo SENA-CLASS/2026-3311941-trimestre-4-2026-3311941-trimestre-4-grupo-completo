@@ -1,0 +1,26 @@
+{
+  "ceet2App": {
+    "checkListCourse": {
+      "home": {
+        "title": "Check List Courses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Check List Course",
+        "createOrEditLabel": "Create or edit a Check List Course",
+        "notFound": "No Check List Courses found"
+      },
+      "created": "A new Check List Course is created with identifier {{ param }}",
+      "updated": "A Check List Course is updated with identifier {{ param }}",
+      "deleted": "A Check List Course is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Check List Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Check List Course"
+      },
+      "id": "ID",
+      "checkListState": "Check List State",
+      "course": "Course",
+      "checkList": "Check List"
+    }
+  }
+}

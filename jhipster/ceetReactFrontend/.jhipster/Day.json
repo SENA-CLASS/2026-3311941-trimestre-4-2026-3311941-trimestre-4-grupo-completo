@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20260619002125"
+  },
+  "applications": ["ceet2"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dayName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "dayState",
+      "fieldType": "State",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE (Activo),INACTIVE (Inactivo)"
+    }
+  ],
+  "name": "Day",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "day",
+      "relationshipName": "schedule",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workingDay",
+      "otherEntityRelationshipName": "day",
+      "relationshipName": "workingDay",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}
